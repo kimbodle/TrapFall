@@ -11,7 +11,6 @@ public class TileManager : MonoBehaviour
     public int width = 5, height = 5; //일단 프로토타입에서는 5*5 
     public Vector2 spawnTilePoint; // 스폰을 시작할 좌표
     [SerializeField] private GameObject fogEffectPrefab;
-    [SerializeField] private float randomTileCooldown = 3f;
 
 
     TileComp[,] tiles;
