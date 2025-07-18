@@ -13,10 +13,16 @@ public enum TileType
     Destroyed = -1
 }
 
+public interface ITimeEvent
+{
+    void OnPlayerEnter(GameObject player);
+}
+
 public class TileComp : MonoBehaviour
 {
     public Sprite[] tileSprite;
-    public float RandomTileTime= 5.0f;
+    public float randomTileTime= 5.0f;
+    public float recoveryTileTime = 3.0f;
 
     Vector2 worldPosition;
     [SerializeField]
@@ -28,6 +34,7 @@ public class TileComp : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    //밟았다고 치고
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (IsWalkable())
@@ -62,5 +69,20 @@ public class TileComp : MonoBehaviour
 
         if (!spriteRenderer || !tileSprite[tileIndex]) return;
         spriteRenderer.sprite = tileSprite[tileIndex];
+    }
+    private void TileEvent()
+    {
+        switch (currentTileType)
+        {
+            case TileType.Danger:
+
+                break;
+            case TileType.Destroyed:
+                Collider2D col = GetComponent<Collider2D>();
+                col.isTrigger = false;
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TileManager : MonoBehaviour
@@ -8,6 +10,7 @@ public class TileManager : MonoBehaviour
     //public float 
 
     TileComp[,] tiles;
+    public List<TileType> roundTileTypes = new List<TileType>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,6 +30,28 @@ public class TileManager : MonoBehaviour
         }
     }
 
+    public void ApplySpecialTiles(int round)
+    {
+        // 라운드별 타일 수 증가 (ex: 3개, 6개, 9개...)
+        int specialCount = Mathf.Min(round * 3, width * height);
+
+        List<TileComp> flatTiles = tiles.Cast<TileComp>().ToList();
+        List<TileComp> normalTiles = flatTiles.Where(t => t.GetTileType() == TileType.Normal).ToList();
+
+        var selectedTiles = normalTiles.OrderBy(x => Random.value).Take(specialCount);
+
+        foreach (TileComp tile in selectedTiles)
+        {
+            //확률표에 따라 특수파일을 소환
+            // 라운드별 가능한 특수타일 중 랜덤 선택
+            //TileType chosen = roundTileTypes[Random.Range(0, roundTileTypes.Count)];
+            TileType chosen = TileType.Spin;
+            tile.SetTileType(chosen);
+        }
+
+        Debug.Log($"[Round {round}] {specialCount} 타일이 특수타일로 변경됨");
+    }
+
     TileComp GetTile(Vector2Int coord)
     {
         if(0 < coord.x && coord.x < width && 0 < coord.y && coord.y < height)
@@ -35,4 +60,6 @@ public class TileManager : MonoBehaviour
         }
         return null;
     }
+
+
 }
