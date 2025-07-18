@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class PlayerController : MonoBehaviour
 
     private PlayerControls playerControls;
     private Vector2 movement;
-    private bool bIsJump;
+    private bool bIsJump = false;
     private Rigidbody2D rb;
     private Collider2D collision2D;
 
@@ -43,13 +44,16 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         move();
-        jump();
     }
 
     private void PlayerInput()
     {
         movement = playerControls.Player.Move.ReadValue<Vector2>();
-        bIsJump = playerControls.Player.Jump.ReadValue<bool>();
+        if (playerControls.Player.Jump.triggered && !bIsJump)
+        {
+            bIsJump = true;
+            StartCoroutine(TemporaryCollisionIgnore());
+        }
 
         animator.SetFloat("moveX", movement.x);
         animator.SetFloat("moveY", movement.y);
@@ -70,11 +74,34 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
     }
 
-    private void jump()
+    IEnumerator TemporaryCollisionIgnore()
     {
-        if (bIsJump)
+        // 모든 타일과 충돌 끄기
+        foreach (var tile in GameObject.FindGameObjectsWithTag("Tile"))
         {
-            //여기서 무적 혹은 콜리전 판정 못하게 바꿀것
+            Collider2D tileCol = tile.GetComponent<Collider2D>();
+            if (tileCol != null)
+            {
+                Debug.Log("true");
+                Physics2D.IgnoreCollision(collision2D, tileCol, true);
+            }
         }
+
+        spriteRenderer.color = Color.black;
+
+        yield return new WaitForSeconds(0.5f); // 무적 시간
+
+        // 다시 충돌 켜기
+        foreach (var tile in GameObject.FindGameObjectsWithTag("Tile"))
+        {
+            Collider2D tileCol = tile.GetComponent<Collider2D>();
+            if (tileCol != null)
+            {
+                Debug.Log("false");
+                Physics2D.IgnoreCollision(collision2D, tileCol, false);
+            }
+        }
+        spriteRenderer.color = Color.white;
+        bIsJump = false;
     }
 }

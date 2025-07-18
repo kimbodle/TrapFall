@@ -1,19 +1,6 @@
 using UnityEngine;
 using System.Collections;
 
-public enum TileType
-{
-    Normal   = 0,
-    Danger   = 1,
-    Spin     = 2,
-    Ice      = 3,
-    Trap     = 4,
-    Electric = 5,
-    Fog      = 6,
-    Random   = 7,
-    Destroyed = 8
-}
-
 public interface ITimeEvent
 {
     void OnPlayerEnter(GameObject player);

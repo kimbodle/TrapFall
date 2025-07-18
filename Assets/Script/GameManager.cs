@@ -6,16 +6,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
-public class TileSpawnRule
-{
-    public TileType tileType;
-    public float spawnInterval; // 0이면 생성 안 함
-}
 public class RoundData
 {
     public int round;
-    public List<TileSpawnRule> tileSpawnRules;
+    public List<TileSpawnRule> tileSpawnRules = new();
+    public List<ObjectSpawnRule> objectSpawnRules = new();
+    public List<ItemSpawnRule> itemSpawnRules = new();
 }
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
