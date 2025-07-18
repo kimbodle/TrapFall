@@ -6,15 +6,19 @@ using UnityEngine;
 
 public class TileManager : MonoBehaviour
 {
+    //언젠간 변수 프로퍼티로 보호해주기
     public GameObject tilePrefab;
     public int width = 5, height = 5; //일단 프로토타입에서는 5*5 
     public Vector2 spawnTilePoint; // 스폰을 시작할 좌표
-    private float lastNormalTileSteppedTime = 0f;
+    public float lastNormalTileSteppedTime = 0f;
+    public float lastRandomTileSteppedTime = 0f;
     [SerializeField] private GameObject fogEffectPrefab;
     [SerializeField] private float fogCheckInterval = 1f;
     [SerializeField] private float fogTriggerCooldown = 5f;
+    [SerializeField] private float randomTileCooldown = 3f;
+    public bool enableRandomTile = false; // 라운드에 따라 설정
     private Coroutine fogMonitorCoroutine = null;
-
+    private Coroutine randomMonitorCoroutine = null;
 
 
     TileComp[,] tiles;
@@ -68,6 +72,7 @@ public class TileManager : MonoBehaviour
         return tiles.Cast<TileComp>().Where(t => t.GetTileType() == TileType.Normal).ToList();
     }
 
+    //너무 비효율적인 코드 같아서 리팩토링 할 예정
     private IEnumerator CheckFogTriggerLoop()
     {
         while (true)
@@ -79,8 +84,29 @@ public class TileManager : MonoBehaviour
                 TriggerFogEffectOnRandomTile();
                 lastNormalTileSteppedTime = Time.time; // 리셋
             }
+
+            if (enableRandomTile && Time.time - lastRandomTileSteppedTime > randomTileCooldown)
+            {
+                TransformRandomTile();
+                lastRandomTileSteppedTime = Time.time;
+            }
         }
     }
+
+    private IEnumerator CheckRandomTriggerLoop()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+
+            if (Time.time - lastRandomTileSteppedTime > randomTileCooldown)
+            {
+                TransformRandomTile();
+                lastRandomTileSteppedTime = Time.time; // 리셋
+            }
+        }
+    }
+
 
     private void TriggerFogEffectOnRandomTile()
     {
@@ -95,6 +121,7 @@ public class TileManager : MonoBehaviour
             Destroy(fog, 3f);
         }
     }
+
 
     public void StartFogMonitor()
     {
@@ -111,17 +138,59 @@ public class TileManager : MonoBehaviour
         }
     }
 
-    public void SpawnFogTile()
-{
-    var normalTiles = GetNormalTiles();
-    if (normalTiles.Count == 0) return;
-
-    TileComp target = normalTiles[Random.Range(0, normalTiles.Count)];
-
-    if (fogEffectPrefab != null)
+    public void StartRandomMonitor()
     {
-        GameObject fog = Instantiate(fogEffectPrefab, target.transform.position, Quaternion.identity);
-        Destroy(fog, 3f);
+        if (randomMonitorCoroutine != null) return;
+        randomMonitorCoroutine = StartCoroutine(CheckRandomTriggerLoop());
     }
-}
+
+    public void StopRandomMonitor()
+    {
+        if (randomMonitorCoroutine != null)
+        {
+            StopCoroutine(randomMonitorCoroutine);
+            randomMonitorCoroutine = null;
+        }
+    }
+
+
+
+    public void SpawnFogTile()
+    {
+        var normalTiles = GetNormalTiles();
+        if (normalTiles.Count == 0) return;
+
+        TileComp target = normalTiles[Random.Range(0, normalTiles.Count)];
+
+        if (fogEffectPrefab != null)
+        {
+            GameObject fog = Instantiate(fogEffectPrefab, target.transform.position, Quaternion.identity);
+            Destroy(fog, 3f);
+        }
+    }
+
+    private void TransformRandomTile()
+    {
+        var randomTiles = GetTilesOfType(TileType.Random);
+        if (randomTiles.Count == 0) return;
+
+        TileComp target = randomTiles[Random.Range(0, randomTiles.Count)];
+
+        TileType[] possibleTypes = new TileType[]
+        {
+        TileType.Spin,
+        TileType.Ice,
+        TileType.Trap,
+        TileType.Fog
+        };
+
+        TileType chosen = possibleTypes[Random.Range(0, possibleTypes.Length)];
+        target.SetTileType(chosen); // 여기서 자동으로 해당 TileEffect 붙음
+    }
+
+    public List<TileComp> GetTilesOfType(TileType type)
+    {
+        return tiles.Cast<TileComp>().Where(t => t.GetTileType() == type).ToList();
+    }
+
 }

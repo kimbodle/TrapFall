@@ -30,12 +30,12 @@ public class RandomTileEffect : MonoBehaviour, ISpecialTile
         if (timeSinceLastStepped >= transformDelay)
         {
             TransformToRandomTile();
+            Debug.Log("RandomTileEffect 유후~");
         }
     }
 
     public void Activate(GameObject player)
     {
-        Debug.Log("RandomTileEffect 유후~");
         timeSinceLastStepped = 0f;
     }
 

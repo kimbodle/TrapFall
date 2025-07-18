@@ -34,6 +34,11 @@ public class TileComp : MonoBehaviour
             {
                 tileManager.ReportNormalTileStepped(); // ¹âÇû´Ù º¸°í
             }
+            if (currentTileType == TileType.Random)
+            {
+                tileManager.lastRandomTileSteppedTime = Time.time;
+            }
+
 
             foreach (var tileEffect in GetComponents<ISpecialTile>())
             {
@@ -55,8 +60,6 @@ public class TileComp : MonoBehaviour
         currentTileType = inputTileType;
         updateTileImage();
         ClearExistingEffects();
-        // ·£´ýÀ¸·Î Å¸ÀÏ ¹Ù²Ù±â
-        //if (currentTileType == TileType.Random) ChangeRandomTile();
         TileEvent();
 
         //if (currentTileType == TileType.Danger) StartCoroutine(DestroyTile());

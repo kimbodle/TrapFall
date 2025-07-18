@@ -109,13 +109,20 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        // 안개 발판이 포함된 경우에만 타일 밟힘 감시 시작
         bool hasFog = data.tileSpawnRules.Any(r => r.tileType == TileType.Fog);
+        bool hasRandom = data.tileSpawnRules.Any(r => r.tileType == TileType.Random);
+
         if (hasFog)
         {
             tileManager.StartFogMonitor();
         }
+
+        if (hasRandom)
+        {
+            tileManager.StartRandomMonitor();
+        }
     }
+
 
 
     void EndRound()
@@ -126,6 +133,8 @@ public class GameManager : MonoBehaviour
         activeSpawnCoroutines.Clear();
 
         tileManager.StopFogMonitor(); // 감시 중단
+        tileManager.StopRandomMonitor();
+
     }
     IEnumerator SpawnTileLoop(TileType type, float interval)
     {
