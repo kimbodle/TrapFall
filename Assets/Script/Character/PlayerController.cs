@@ -7,7 +7,9 @@ public class PlayerController : MonoBehaviour
 
     private PlayerControls playerControls;
     private Vector2 movement;
+    private bool bIsJump;
     private Rigidbody2D rb;
+    private Collider2D collision2D;
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        collision2D = GetComponent<Collider2D>();
     }
 
     private void OnEnable()
@@ -40,11 +43,13 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         move();
+        jump();
     }
 
     private void PlayerInput()
     {
         movement = playerControls.Player.Move.ReadValue<Vector2>();
+        bIsJump = playerControls.Player.Jump.ReadValue<bool>();
 
         animator.SetFloat("moveX", movement.x);
         animator.SetFloat("moveY", movement.y);
@@ -63,5 +68,13 @@ public class PlayerController : MonoBehaviour
     private void move()
     {
         rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
+    }
+
+    private void jump()
+    {
+        if (bIsJump)
+        {
+            //여기서 무적 혹은 콜리전 판정 못하게 바꿀것
+        }
     }
 }
