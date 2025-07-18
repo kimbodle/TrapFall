@@ -87,4 +87,15 @@ public class TileManager : MonoBehaviour
             Destroy(fog, 3f);
         }
     }
+
+    public void ResetTiles()
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                //tiles[x, y].
+            }
+        }
+    }
 }

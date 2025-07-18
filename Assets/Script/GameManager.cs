@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,30 +16,30 @@ public class RoundData
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameManager instance;
-    public GameManager Instance {  get { return instance; } }
+    public static GameManager Instance { get; private set; }
 
     public TileManager tileManager;
     public RoundCsvLoader roundCsvLoader;
+    public UIManager uiManager;
     private List<RoundData> rounds = new List<RoundData>();
     private List<Coroutine> activeSpawnCoroutines = new List<Coroutine>();
 
-
+    private bool isGameOver = false;
 
     [SerializeField]
     int currentRound = 0;
 
     private void Awake()
     {
-        if (instance == null)
+        if (Instance != null && Instance != this)
         {
-            instance = this;
-        }
-        else
-        {
+            Destroy(gameObject); // ì¤‘ë³µ ë°©ì§€
             return;
         }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        uiManager = GetComponentInChildren<UIManager>();
     }
 
     private void Start()
@@ -50,33 +50,14 @@ public class GameManager : MonoBehaviour
 
     void InitRounds()
     {
-        //rounds.Add(new RoundData
-        //{
-        //    round = 1,
-        //    tileSpawnRules = new List<TileSpawnRule>
-        //    {
-        //        new TileSpawnRule { tileType = TileType.Danger, spawnInterval = 1f }
-        //    }
-        //});
-
-        //rounds.Add(new RoundData
-        //{
-        //    round = 2,
-        //    tileSpawnRules = new List<TileSpawnRule>
-        //    {
-        //        new TileSpawnRule { tileType = TileType.Danger, spawnInterval = 1f },
-        //        new TileSpawnRule { tileType = TileType.Spin, spawnInterval = 10f }
-        //    }
-        //});
-
         rounds = roundCsvLoader.LoadRoundsFromCSV();
         //for (int i = 0; i < rounds.Count; i++)
         //{
-        //    Debug.Log(rounds[i].round + "¶ó¿îµå µ¥ÀÌÅÍ ");
+        //    Debug.Log(rounds[i].round + "ë¼ìš´ë“œ ë°ì´í„° ");
         //    for (int j = 0; j < rounds[i].tileSpawnRules.Count; j++)
         //    {
         //        TileSpawnRule rule = rounds[i].tileSpawnRules[j];
-        //        Debug.Log(rounds[i].round + "¶ó¿îµå µ¥ÀÌÅÍ " + rule.tileType + "¹øÂ° Å¸ÀÏ ÇüÅÂ" + rule.spawnInterval);
+        //        Debug.Log(rounds[i].round + "ë¼ìš´ë“œ ë°ì´í„° " + rule.tileType + "ë²ˆì§¸ íƒ€ì¼ í˜•íƒœ" + rule.spawnInterval);
 
         //    }
         //}
@@ -87,14 +68,14 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             currentRound++;
-            Debug.Log($"[Round {currentRound}] ½ÃÀÛ");
+            Debug.Log($"[Round {currentRound}] ì‹œì‘");
 
             RoundData roundData = rounds.FirstOrDefault(r => r.round == currentRound);
             if (roundData != null)
                 StartRound(roundData);
 
-            yield return new WaitForSeconds(10f); // ¶ó¿îµå ÁøÇà ½Ã°£
-            EndRound(); // ´ÙÀ½ ¶ó¿îµå Àü ÁØºñ
+            yield return new WaitForSeconds(10f); // ë¼ìš´ë“œ ì§„í–‰ ì‹œê°„
+            EndRound(); // ë‹¤ìŒ ë¼ìš´ë“œ ì „ ì¤€ë¹„
         }
     }
 
@@ -110,8 +91,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-
     void EndRound()
     {
         foreach (var co in activeSpawnCoroutines)
@@ -126,5 +105,18 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(interval);
             tileManager.SpawnSpecialTile(type);
         }
+    }
+    public void GameOver()
+    {
+        if (isGameOver) return;
+        isGameOver = true;
+
+        Debug.Log("ğŸ’€ Game Over!");
+        // UI, ì¬ì‹œì‘ ë“± í˜¸ì¶œ
+        //ê·¸ê±° ê²€ì • í˜ì´ë“œì¸ ì¹´ë©”ë¼ ì—°ì¶œ
+        //ê²Œì„ ì˜¤ë²„ UIì¶œë ¥
+        EndRound() ;
+        tileManager.ResetTiles();
+        uiManager.ShowGameOverUI();
     }
 }

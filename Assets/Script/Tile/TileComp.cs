@@ -26,13 +26,28 @@ public class TileComp : MonoBehaviour
     //밟았다고 치고
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (IsWalkable())
+        if (collision.CompareTag("Player"))
         {
-            GameObject player = collision.gameObject;
-
-            foreach (var tileEffect in GetComponents<ISpecialTile>())
+            var playerController = collision.GetComponent<PlayerController>();
+            if (playerController != null && playerController.bIsJump)
             {
-                tileEffect.Activate(player);
+                Debug.Log("무적 중 → 타일 효과 무시");
+                return;
+            }
+
+            if (IsWalkable())
+            {
+                GameObject player = collision.gameObject;
+
+                foreach (var tileEffect in GetComponents<ISpecialTile>())
+                {
+                    tileEffect.Activate(player);
+                }
+            }
+            else
+            {
+                Debug.Log("죽음");
+                GameManager.Instance.GameOver();
             }
         }
     }

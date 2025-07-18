@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
 
     private PlayerControls playerControls;
     private Vector2 movement;
-    private bool bIsJump = false;
     private Rigidbody2D rb;
     private Collider2D collision2D;
 
@@ -24,8 +23,8 @@ public class PlayerController : MonoBehaviour
     private bool isJumpDisabled = false;
     private Coroutine jumpDisableCoroutine = null;
 
-
     private Vector2 lastMoveDir = Vector2.down;
+    public bool bIsJump = false;
 
     private void Awake()
     {
@@ -90,33 +89,11 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator TemporaryCollisionIgnore()
     {
-        // 모든 타일과 충돌 끄기
-        foreach (var tile in GameObject.FindGameObjectsWithTag("Tile"))
-        {
-            Collider2D tileCol = tile.GetComponent<Collider2D>();
-            if (tileCol != null)
-            {
-                Debug.Log("true");
-                Physics2D.IgnoreCollision(collision2D, tileCol, true);
-            }
-        }
-
+        bIsJump = true;
         spriteRenderer.color = Color.black;
-
-        yield return new WaitForSeconds(0.5f); // 무적 시간
-
-        // 다시 충돌 켜기
-        foreach (var tile in GameObject.FindGameObjectsWithTag("Tile"))
-        {
-            Collider2D tileCol = tile.GetComponent<Collider2D>();
-            if (tileCol != null)
-            {
-                Debug.Log("false");
-                Physics2D.IgnoreCollision(collision2D, tileCol, false);
-            }
-        }
-        spriteRenderer.color = Color.white;
+        yield return new WaitForSeconds(0.5f);
         bIsJump = false;
+        spriteRenderer.color = Color.white;
     }
     public void DisableJump(float duration)
     {
