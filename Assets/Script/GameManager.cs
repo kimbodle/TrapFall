@@ -108,13 +108,6 @@ public class GameManager : MonoBehaviour
                 activeSpawnCoroutines.Add(co);
             }
         }
-
-        bool hasRandom = data.tileSpawnRules.Any(r => r.tileType == TileType.Random);
-
-        if (hasRandom)
-        {
-            tileManager.StartRandomMonitor();
-        }
     }
 
 
@@ -125,8 +118,6 @@ public class GameManager : MonoBehaviour
             StopCoroutine(co);
 
         activeSpawnCoroutines.Clear();
-        tileManager.StopRandomMonitor();
-
     }
     IEnumerator SpawnTileLoop(TileType type, float interval)
     {

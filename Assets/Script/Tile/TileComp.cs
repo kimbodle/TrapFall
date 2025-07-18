@@ -30,12 +30,6 @@ public class TileComp : MonoBehaviour
         {
             GameObject player = collision.gameObject;
 
-            if (currentTileType == TileType.Random)
-            {
-                tileManager.lastRandomTileSteppedTime = Time.time;
-            }
-
-
             foreach (var tileEffect in GetComponents<ISpecialTile>())
             {
                 tileEffect.Activate(player);
