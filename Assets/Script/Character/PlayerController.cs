@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour
     private bool isInverted = false;
     private Coroutine invertCoroutine = null;
 
+    private bool isJumpDisabled = false;
+    private Coroutine jumpDisableCoroutine = null;
+
+
     private Vector2 lastMoveDir = Vector2.down;
 
     private void Awake()
@@ -58,7 +62,7 @@ public class PlayerController : MonoBehaviour
         if (isInverted)
             movement.x *= -1;
 
-        if (playerControls.Player.Jump.triggered && !bIsJump)
+        if (!isJumpDisabled && playerControls.Player.Jump.triggered && !bIsJump)
         {
             bIsJump = true;
             StartCoroutine(TemporaryCollisionIgnore());
@@ -76,6 +80,7 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("LastMoveX", lastMoveDir.x);
             animator.SetFloat("LastMoveY", lastMoveDir.y);
         }
+
     }
 
     private void move()
@@ -112,6 +117,23 @@ public class PlayerController : MonoBehaviour
         }
         spriteRenderer.color = Color.white;
         bIsJump = false;
+    }
+    public void DisableJump(float duration)
+    {
+        if (jumpDisableCoroutine != null)
+            StopCoroutine(jumpDisableCoroutine);
+
+        jumpDisableCoroutine = StartCoroutine(JumpDisableWatcher(duration));
+    }
+    private IEnumerator JumpDisableWatcher(float duration)
+    {
+        isJumpDisabled = true;
+        spriteRenderer.color = Color.red;
+
+        yield return new WaitForSeconds(duration);
+
+        isJumpDisabled = false;
+        spriteRenderer.color = Color.white;
     }
     public void ModifySpeed(float multiplier, float duration)
     {
