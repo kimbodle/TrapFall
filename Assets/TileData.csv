@@ -1,6 +1,6 @@
 Round,EyeStoneWatcher,HowlingMouth,Danger,Trap,Spin,Electric,Ice,Fog,Random,TimeRelic,AncientRing,GoldenSunPiece,LostMapPiece
-1,,,1,,,,,,,,,,
-2,,,1,10,,,,,,,,,
+1,,,1,,,,,,5,,,,
+2,,,1,10,,,,5,5,,,,
 3,,,0.5,10,10,,,,,,,,
 4,,,0.5,10,10,10,,,,,,,
 5,10,10,0.5,10,10,10,10,,,,,,

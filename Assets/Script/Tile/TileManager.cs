@@ -13,6 +13,7 @@ public class TileManager : MonoBehaviour
     [SerializeField] private GameObject fogEffectPrefab;
     [SerializeField] private float fogCheckInterval = 1f;
     [SerializeField] private float fogTriggerCooldown = 5f;
+    private Coroutine fogMonitorCoroutine = null;
 
 
 
@@ -23,7 +24,6 @@ public class TileManager : MonoBehaviour
     {
         //게임 시작시 타일 생성
         GeneratedGrid();
-        StartCoroutine(CheckFogTriggerLoop());
     }
 
     void GeneratedGrid()
@@ -95,4 +95,33 @@ public class TileManager : MonoBehaviour
             Destroy(fog, 3f);
         }
     }
+
+    public void StartFogMonitor()
+    {
+        if (fogMonitorCoroutine != null) return;
+        fogMonitorCoroutine = StartCoroutine(CheckFogTriggerLoop());
+    }
+
+    public void StopFogMonitor()
+    {
+        if (fogMonitorCoroutine != null)
+        {
+            StopCoroutine(fogMonitorCoroutine);
+            fogMonitorCoroutine = null;
+        }
+    }
+
+    public void SpawnFogTile()
+{
+    var normalTiles = GetNormalTiles();
+    if (normalTiles.Count == 0) return;
+
+    TileComp target = normalTiles[Random.Range(0, normalTiles.Count)];
+
+    if (fogEffectPrefab != null)
+    {
+        GameObject fog = Instantiate(fogEffectPrefab, target.transform.position, Quaternion.identity);
+        Destroy(fog, 3f);
+    }
+}
 }

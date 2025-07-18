@@ -104,10 +104,9 @@ public class TileComp : MonoBehaviour
             case TileType.Ice:
                 gameObject.AddComponent<IceTileEffect>();
                 break;
-            case TileType.Fog:
-                gameObject.AddComponent<IceTileEffect>();
+            case TileType.Random:
+                gameObject.AddComponent<RandomTileEffect>();
                 break;
-                // Add other types here
         }
     }
 }
