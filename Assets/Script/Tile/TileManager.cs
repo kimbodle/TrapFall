@@ -12,7 +12,6 @@ public class TileManager : MonoBehaviour
     TileComp[,] tiles;
     public List<TileType> roundTileTypes = new List<TileType>();
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //게임 시작시 타일 생성

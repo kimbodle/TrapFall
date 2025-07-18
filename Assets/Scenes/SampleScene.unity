@@ -1956,6 +1956,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 996024698}
+  - component: {fileID: 996024699}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1976,10 +1977,26 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1507597674}
   - {fileID: 328531373}
   - {fileID: 1692122148}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &996024699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996024697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da4133c8252c1ee40b015315aa35322b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instance: {fileID: 996024699}
+  tileManager: {fileID: 1507597673}
+  currentRound: 0
 --- !u!1 &1000074777
 GameObject:
   m_ObjectHideFlags: 0
@@ -2186,11 +2203,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5541637667538504191, guid: 73af9a9189cd91c409c41ef99861fb93, type: 3}
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5201084043596528297, guid: 73af9a9189cd91c409c41ef99861fb93, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5271339065603303482, guid: 73af9a9189cd91c409c41ef99861fb93, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1580044351}
   m_SourcePrefab: {fileID: 100100000, guid: 73af9a9189cd91c409c41ef99861fb93, type: 3}
 --- !u!1 &1157882167
 GameObject:
@@ -3218,7 +3242,8 @@ MonoBehaviour:
   tilePrefab: {fileID: 4524081116972622518, guid: e5258c8603eae3041b15ecc1ed630f0c, type: 3}
   width: 5
   height: 5
-  spawnTilePoint: {x: 2, y: 2}
+  spawnTilePoint: {x: 0, y: 0}
+  roundTileTypes: 
 --- !u!4 &1507597674
 Transform:
   m_ObjectHideFlags: 0
@@ -3227,12 +3252,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1507597672}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.97, y: -0.01, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.8773801, y: 0.34644002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 996024698}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1540848415
 GameObject:
@@ -3370,6 +3395,48 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540848415}
   m_CullTransparentMesh: 1
+--- !u!1 &1580044344 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5271339065603303482, guid: 73af9a9189cd91c409c41ef99861fb93, type: 3}
+  m_PrefabInstance: {fileID: 1151993658}
+  m_PrefabAsset: {fileID: 0}
+--- !u!70 &1580044351
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580044344}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.36, y: 0.5}
+  m_Direction: 0
 --- !u!1 &1611284767
 GameObject:
   m_ObjectHideFlags: 0
@@ -4893,7 +4960,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
-  - {fileID: 1507597674}
   - {fileID: 1151993658}
   - {fileID: 996024698}
   - {fileID: 1611284771}

@@ -41,31 +41,47 @@ public class TileComp : MonoBehaviour
         if (IsWalkable())
         {
             //일단은 타일에서 콜리전으로 플레이어 판단하기
-            Debug.Log(GetTileType().ToString());
+            GameObject player = collision.gameObject;
+
+            foreach (var tileEffect in GetComponents<ISpecialTile>())
+            {
+                tileEffect.Activate(player);
+            }
         }
     }
 
     public bool IsWalkable()
     {
-        return currentTileType != TileType.Danger && currentTileType != TileType.Destroyed;
+        //return currentTileType != TileType.Danger && currentTileType != TileType.Destroyed;
+        return currentTileType != TileType.Destroyed;
     }
     public TileType GetTileType() { return currentTileType; }
 
-    public void SetTileType(TileType intputTileType)
+    public void SetTileType(TileType inputTileType)
     {
-        currentTileType = intputTileType;
+        currentTileType = inputTileType;
+        updateTileImage();
+        ClearExistingEffects();
         // 랜덤으로 타일 바꾸기
         //if (currentTileType == TileType.Random) ChangeRandomTile();
-        updateTileImage();
+        TileEvent();
 
-        if (currentTileType == TileType.Danger) StartCoroutine(DestroyTile());
+        //if (currentTileType == TileType.Danger) StartCoroutine(DestroyTile());
     }
+
+    public void ClearExistingEffects()
+    {
+        foreach (var effect in GetComponents<ISpecialTile>())
+        {
+            Destroy((Component)effect);
+        }
+    }
+
     private void updateTileImage()
     {
         int tileIndex = (int)currentTileType;
-        Debug.Log(tileIndex);
+        if (!spriteRenderer || tileSprite.Length <= tileIndex || tileSprite[tileIndex] == null) return;
 
-        if (!spriteRenderer || !tileSprite[tileIndex]) return;
         spriteRenderer.sprite = tileSprite[tileIndex];
     }
 
@@ -76,21 +92,20 @@ public class TileComp : MonoBehaviour
         SetTileType(TileType.Destroyed);
 
         yield return new WaitForSeconds(recoveryTileTime);
-        SetTileType((TileType.Normal));
+        SetTileType(TileType.Normal);
     }
     private void TileEvent()
     {
         switch (currentTileType)
         {
             case TileType.Danger:
-
+                gameObject.AddComponent<DangerTileEffect>();
+                StartCoroutine(DestroyTile());
                 break;
-            case TileType.Destroyed:
-                Collider2D col = GetComponent<Collider2D>();
-                col.isTrigger = false;
+            case TileType.Spin:
+                gameObject.AddComponent<SpinTileEffect>();
                 break;
-            default:
-                break;
+                // Add other types here
         }
     }
 }
