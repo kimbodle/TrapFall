@@ -73,7 +73,7 @@ public class TileComp : MonoBehaviour
     }
 
     //셍성된 파괴된 타일은 시간이지나면 다시 원래대로 돌아옴
-    IEnumerator DestroyTile()
+    public IEnumerator DestroyTile()
     {
         yield return new WaitForSeconds(1f);
         SetTileType(TileType.Destroyed);
@@ -89,8 +89,14 @@ public class TileComp : MonoBehaviour
                 gameObject.AddComponent<DangerTileEffect>();
                 StartCoroutine(DestroyTile());
                 break;
+            case TileType.Trap:
+                gameObject.AddComponent<TrapTileEffect>();
+                break;
             case TileType.Spin:
                 gameObject.AddComponent<SpinTileEffect>();
+                break;
+            case TileType.Ice:
+                gameObject.AddComponent<IceTileEffect>();
                 break;
                 // Add other types here
         }

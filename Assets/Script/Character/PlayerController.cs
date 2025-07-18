@@ -15,6 +15,12 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
+    private float originalSpeed = 0;
+    private float slowEndTime = 0f;
+    private bool isSlowed = false;
+    private bool isInverted = false;
+    private Coroutine invertCoroutine = null;
+
     private Vector2 lastMoveDir = Vector2.down;
 
     private void Awake()
@@ -48,6 +54,9 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerInput()
     {
+        if (isInverted)
+            movement.x *= -1;
+
         movement = playerControls.Player.Move.ReadValue<Vector2>();
         if (playerControls.Player.Jump.triggered && !bIsJump)
         {
@@ -103,5 +112,44 @@ public class PlayerController : MonoBehaviour
         }
         spriteRenderer.color = Color.white;
         bIsJump = false;
+    }
+    public void ModifySpeed(float multiplier, float duration)
+    {
+        float now = Time.time;
+
+        if (!isSlowed)
+        {
+            isSlowed = true;
+            originalSpeed = moveSpeed;
+            moveSpeed *= multiplier;
+            StartCoroutine(SlowWatcher());
+        }
+
+        slowEndTime = now + duration;
+    }
+
+    private IEnumerator SlowWatcher()
+    {
+        while (Time.time < slowEndTime)
+            yield return null;
+
+        moveSpeed = originalSpeed;
+        isSlowed = false;
+    }
+
+    public void InvertInput(float duration = 2f)
+    {
+        if (invertCoroutine != null)
+            StopCoroutine(invertCoroutine);
+
+        isInverted = true;
+        invertCoroutine = StartCoroutine(InvertWatcher(duration));
+    }
+
+    private IEnumerator InvertWatcher(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        isInverted = false;
+        invertCoroutine = null;
     }
 }
