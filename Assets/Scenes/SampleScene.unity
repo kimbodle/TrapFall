@@ -3266,6 +3266,9 @@ MonoBehaviour:
   width: 5
   height: 5
   spawnTilePoint: {x: 0, y: 0}
+  fogEffectPrefab: {fileID: 4231136450334651949, guid: ddc8874620c88594cbad93f5d5101dcb, type: 3}
+  fogCheckInterval: 1
+  fogTriggerCooldown: 5
   roundTileTypes: 
 --- !u!4 &1507597674
 Transform:

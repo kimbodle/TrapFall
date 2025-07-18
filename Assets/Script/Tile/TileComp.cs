@@ -11,6 +11,7 @@ public class TileComp : MonoBehaviour
     public Sprite[] tileSprite;
     public float randomTileTime= 5.0f;
     public float recoveryTileTime = 3.0f;
+    public TileManager tileManager;
 
     Vector2 worldPosition;
     [SerializeField]
@@ -27,8 +28,12 @@ public class TileComp : MonoBehaviour
     {
         if (IsWalkable())
         {
-            //일단은 타일에서 콜리전으로 플레이어 판단하기
             GameObject player = collision.gameObject;
+
+            if (currentTileType == TileType.Normal)
+            {
+                tileManager.ReportNormalTileStepped(); // 밟혔다 보고
+            }
 
             foreach (var tileEffect in GetComponents<ISpecialTile>())
             {
@@ -36,6 +41,7 @@ public class TileComp : MonoBehaviour
             }
         }
     }
+
 
     public bool IsWalkable()
     {
@@ -96,6 +102,9 @@ public class TileComp : MonoBehaviour
                 gameObject.AddComponent<SpinTileEffect>();
                 break;
             case TileType.Ice:
+                gameObject.AddComponent<IceTileEffect>();
+                break;
+            case TileType.Fog:
                 gameObject.AddComponent<IceTileEffect>();
                 break;
                 // Add other types here
