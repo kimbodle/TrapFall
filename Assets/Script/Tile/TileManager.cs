@@ -10,14 +10,10 @@ public class TileManager : MonoBehaviour
     public GameObject tilePrefab;
     public int width = 5, height = 5; //일단 프로토타입에서는 5*5 
     public Vector2 spawnTilePoint; // 스폰을 시작할 좌표
-    public float lastNormalTileSteppedTime = 0f;
     public float lastRandomTileSteppedTime = 0f;
     [SerializeField] private GameObject fogEffectPrefab;
-    [SerializeField] private float fogCheckInterval = 1f;
-    [SerializeField] private float fogTriggerCooldown = 5f;
     [SerializeField] private float randomTileCooldown = 3f;
     public bool enableRandomTile = false; // 라운드에 따라 설정
-    private Coroutine fogMonitorCoroutine = null;
     private Coroutine randomMonitorCoroutine = null;
 
 
@@ -62,36 +58,13 @@ public class TileManager : MonoBehaviour
         TileComp randomTile = normalTiles[Random.Range(0, normalTiles.Count)];
         randomTile.SetTileType(type);
     }
-    public void ReportNormalTileStepped()
-    {
-        lastNormalTileSteppedTime = Time.time;
-    }
 
     public List<TileComp> GetNormalTiles()
     {
         return tiles.Cast<TileComp>().Where(t => t.GetTileType() == TileType.Normal).ToList();
     }
 
-    //너무 비효율적인 코드 같아서 리팩토링 할 예정
-    private IEnumerator CheckFogTriggerLoop()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(fogCheckInterval);
-
-            if (Time.time - lastNormalTileSteppedTime > fogTriggerCooldown)
-            {
-                TriggerFogEffectOnRandomTile();
-                lastNormalTileSteppedTime = Time.time; // 리셋
-            }
-
-            if (enableRandomTile && Time.time - lastRandomTileSteppedTime > randomTileCooldown)
-            {
-                TransformRandomTile();
-                lastRandomTileSteppedTime = Time.time;
-            }
-        }
-    }
+   
 
     private IEnumerator CheckRandomTriggerLoop()
     {
@@ -107,36 +80,6 @@ public class TileManager : MonoBehaviour
         }
     }
 
-
-    private void TriggerFogEffectOnRandomTile()
-    {
-        var normalTiles = GetNormalTiles();
-        if (normalTiles.Count == 0) return;
-
-        var targetTile = normalTiles[Random.Range(0, normalTiles.Count)];
-
-        if (fogEffectPrefab != null)
-        {
-            GameObject fog = Instantiate(fogEffectPrefab, targetTile.transform.position, Quaternion.identity);
-            Destroy(fog, 3f);
-        }
-    }
-
-
-    public void StartFogMonitor()
-    {
-        if (fogMonitorCoroutine != null) return;
-        fogMonitorCoroutine = StartCoroutine(CheckFogTriggerLoop());
-    }
-
-    public void StopFogMonitor()
-    {
-        if (fogMonitorCoroutine != null)
-        {
-            StopCoroutine(fogMonitorCoroutine);
-            fogMonitorCoroutine = null;
-        }
-    }
 
     public void StartRandomMonitor()
     {
@@ -168,6 +111,20 @@ public class TileManager : MonoBehaviour
             Destroy(fog, 3f);
         }
     }
+    public void SpawnFogEffectOnRandomTile()
+    {
+        List<TileComp> allTiles = tiles.Cast<TileComp>().ToList();
+        if (allTiles.Count == 0) return;
+
+        TileComp target = allTiles[Random.Range(0, allTiles.Count)];
+
+        if (fogEffectPrefab != null)
+        {
+            GameObject fog = Instantiate(fogEffectPrefab, target.transform.position, Quaternion.identity);
+            Destroy(fog, 3f);
+        }
+    }
+
 
     private void TransformRandomTile()
     {

@@ -109,13 +109,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        bool hasFog = data.tileSpawnRules.Any(r => r.tileType == TileType.Fog);
         bool hasRandom = data.tileSpawnRules.Any(r => r.tileType == TileType.Random);
-
-        if (hasFog)
-        {
-            tileManager.StartFogMonitor();
-        }
 
         if (hasRandom)
         {
@@ -131,8 +125,6 @@ public class GameManager : MonoBehaviour
             StopCoroutine(co);
 
         activeSpawnCoroutines.Clear();
-
-        tileManager.StopFogMonitor(); // 감시 중단
         tileManager.StopRandomMonitor();
 
     }
@@ -141,15 +133,7 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(interval);
-
-            if (type == TileType.Fog)
-            {
-                tileManager.SpawnFogTile();
-            }
-            else
-            {
-                tileManager.SpawnSpecialTile(type);
-            }
+            tileManager.SpawnSpecialTile(type);
         }
     }
 }

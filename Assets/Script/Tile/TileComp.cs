@@ -30,10 +30,6 @@ public class TileComp : MonoBehaviour
         {
             GameObject player = collision.gameObject;
 
-            if (currentTileType == TileType.Normal)
-            {
-                tileManager.ReportNormalTileStepped(); // ¹âÇû´Ù º¸°í
-            }
             if (currentTileType == TileType.Random)
             {
                 tileManager.lastRandomTileSteppedTime = Time.time;
@@ -106,6 +102,9 @@ public class TileComp : MonoBehaviour
                 break;
             case TileType.Ice:
                 gameObject.AddComponent<IceTileEffect>();
+                break;
+            case TileType.Fog:
+                gameObject.AddComponent<FogTileEffect>();
                 break;
             case TileType.Random:
                 gameObject.AddComponent<RandomTileEffect>();
