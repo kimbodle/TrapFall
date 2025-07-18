@@ -54,10 +54,10 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerInput()
     {
+        movement = playerControls.Player.Move.ReadValue<Vector2>();
         if (isInverted)
             movement.x *= -1;
 
-        movement = playerControls.Player.Move.ReadValue<Vector2>();
         if (playerControls.Player.Jump.triggered && !bIsJump)
         {
             bIsJump = true;
