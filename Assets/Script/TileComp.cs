@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public enum TileType
 {
@@ -10,7 +11,7 @@ public enum TileType
     Electric = 5,
     Fog      = 6,
     Random   = 7,
-    Destroyed = -1
+    Destroyed = 8
 }
 
 public interface ITimeEvent
@@ -41,15 +42,9 @@ public class TileComp : MonoBehaviour
         {
             //일단은 타일에서 콜리전으로 플레이어 판단하기
             Debug.Log(GetTileType().ToString());
-            SetTileType(TileType.Danger);
         }
     }
 
-    void ChangeRandomTile()
-    {
-        int tileIndex = Random.Range(0, tileSprite.Length - 1);
-        SetTileType((TileType)tileIndex);
-    }
     public bool IsWalkable()
     {
         return currentTileType != TileType.Danger && currentTileType != TileType.Destroyed;
@@ -60,15 +55,28 @@ public class TileComp : MonoBehaviour
     {
         currentTileType = intputTileType;
         // 랜덤으로 타일 바꾸기
-        if (currentTileType == TileType.Random) ChangeRandomTile();
+        //if (currentTileType == TileType.Random) ChangeRandomTile();
         updateTileImage();
+
+        if (currentTileType == TileType.Danger) StartCoroutine(DestroyTile());
     }
     private void updateTileImage()
     {
         int tileIndex = (int)currentTileType;
+        Debug.Log(tileIndex);
 
         if (!spriteRenderer || !tileSprite[tileIndex]) return;
         spriteRenderer.sprite = tileSprite[tileIndex];
+    }
+
+    //셍성된 파괴된 타일은 시간이지나면 다시 원래대로 돌아옴
+    IEnumerator DestroyTile()
+    {
+        yield return new WaitForSeconds(1f);
+        SetTileType(TileType.Destroyed);
+
+        yield return new WaitForSeconds(recoveryTileTime);
+        SetTileType((TileType.Normal));
     }
     private void TileEvent()
     {

@@ -61,5 +61,17 @@ public class TileManager : MonoBehaviour
         return null;
     }
 
+    public void SpawnSpecialTile(TileType type)
+    {
+        List<TileComp> normalTiles = GetNormalTiles();
+        if (normalTiles.Count == 0) return;
 
+        TileComp randomTile = normalTiles[Random.Range(0, normalTiles.Count)];
+        randomTile.SetTileType(type);
+    }
+
+    public List<TileComp> GetNormalTiles()
+    {
+        return tiles.Cast<TileComp>().Where(t => t.GetTileType() == TileType.Normal).ToList();
+    }
 }

@@ -93,10 +93,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileSprite:
-  - {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  - {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   - {fileID: -712631045867808456, guid: b670ab75dde984907b8570040daa08c5, type: 3}
   - {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
-  RandomTileTime: 5
+  - {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  - {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  - {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  - {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  - {fileID: 7482667652216324306, guid: 0ae1e1b3611550840908cb84ff62cede, type: 3}
+  - {fileID: 7482667652216324306, guid: 0ae1e1b3611550840908cb84ff62cede, type: 3}
+  - {fileID: 7482667652216324306, guid: 0ae1e1b3611550840908cb84ff62cede, type: 3}
+  randomTileTime: 5
+  recoveryTileTime: 3
   currentTileType: 0
 --- !u!212 &5158120288886646027
 SpriteRenderer:

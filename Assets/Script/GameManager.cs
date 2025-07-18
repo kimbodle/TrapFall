@@ -1,8 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[System.Serializable]
+public class TileSpawnRule
+{
+    public TileType tileType;
+    public float spawnInterval; // 0이면 생성 안 함
+}
+public class RoundData
+{
+    public int round;
+    public List<TileSpawnRule> tileSpawnRules;
+}
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
@@ -10,6 +23,8 @@ public class GameManager : MonoBehaviour
     public GameManager Instance {  get { return instance; } }
 
     public TileManager tileManager;
+    private List<RoundData> rounds = new List<RoundData>();
+    private List<Coroutine> activeSpawnCoroutines = new List<Coroutine>();
 
     [SerializeField]
     int currentRound = 0;
@@ -28,38 +43,76 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        InitRounds();
         StartCoroutine(RoundLoop());
+    }
+
+    void InitRounds()
+    {
+        rounds.Add(new RoundData
+        {
+            round = 1,
+            tileSpawnRules = new List<TileSpawnRule>
+            {
+                new TileSpawnRule { tileType = TileType.Danger, spawnInterval = 1f }
+            }
+        });
+
+        rounds.Add(new RoundData
+        {
+            round = 2,
+            tileSpawnRules = new List<TileSpawnRule>
+            {
+                new TileSpawnRule { tileType = TileType.Danger, spawnInterval = 1f },
+                new TileSpawnRule { tileType = TileType.Spin, spawnInterval = 10f }
+            }
+        });
+
+
     }
 
     IEnumerator RoundLoop()
     {
         while (true)
         {
-            yield return new WaitForSeconds(10f);
-
             currentRound++;
+            Debug.Log($"[Round {currentRound}] 시작");
 
-            // 라운드마다 가능한 특수타일 종류 설정
-            tileManager.roundTileTypes = GetAllowedTileTypesForRound(currentRound);
+            RoundData roundData = rounds.FirstOrDefault(r => r.round == currentRound);
+            if (roundData != null)
+                StartRound(roundData);
 
-            tileManager.ApplySpecialTiles(currentRound);
+            yield return new WaitForSeconds(10f); // 라운드 진행 시간
+            EndRound(); // 다음 라운드 전 준비
         }
     }
-    private List<TileType> GetAllowedTileTypesForRound(int round)
+
+    void StartRound(RoundData data)
     {
-        // 예시: 라운드 증가에 따라 더 많은 종류 허용
-        if (round == 1) return new List<TileType> { TileType.Danger };
-        if (round == 2) return new List<TileType> { TileType.Danger, TileType.Ice };
-        if (round == 3) return new List<TileType> { TileType.Danger, TileType.Ice, TileType.Trap };
-        return new List<TileType>
+        foreach (var rule in data.tileSpawnRules)
         {
-            TileType.Danger,
-            TileType.Ice,
-            TileType.Spin,
-            TileType.Trap,
-            TileType.Electric,
-            TileType.Fog,
-            TileType.Random
-        };
+            if (rule.spawnInterval > 0)
+            {
+                Coroutine co = StartCoroutine(SpawnTileLoop(rule.tileType, rule.spawnInterval));
+                activeSpawnCoroutines.Add(co);
+            }
+        }
+    }
+
+    void EndRound()
+    {
+        // Stop previous round's coroutines
+        foreach (var co in activeSpawnCoroutines)
+            StopCoroutine(co);
+
+        activeSpawnCoroutines.Clear();
+    }
+    IEnumerator SpawnTileLoop(TileType type, float interval)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(interval);
+            tileManager.SpawnSpecialTile(type);
+        }
     }
 }
