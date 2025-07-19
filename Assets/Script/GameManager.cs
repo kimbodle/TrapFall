@@ -189,7 +189,7 @@ public class GameManager : MonoBehaviour
         EndRound() ;
         StopAllCoroutines();
         tileManager.ResetTiles();
-        uiManager.ShowGameOverUI();
+        uiManager.ShowRankUI();
     }
 
     public void SetScore(int score)

@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public GameObject dialogPanel;
     public GameObject gameOverPanel;
     public GameObject settingPanel;
+    public GameObject rankingPanel;
 
     [Header("UI Elements")]
     public TextMeshProUGUI gameOverScoreText;
@@ -20,6 +21,9 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI inGameScoreText;
     public TextMeshProUGUI inGameTimeText;
     public TextMeshProUGUI inGameRoundText;
+
+    [Header("Rank Elements")]
+    public RankingManager rankingManager;
 
     private int currentScore = 0;
 
@@ -31,12 +35,14 @@ public class UIManager : MonoBehaviour
         dialogPanel.SetActive(false);
         gameOverPanel.SetActive(false);
         settingPanel.SetActive(false);
+        rankingPanel.SetActive(false);
     }
 
     public void ShowTutorialUI() => SetPanel(tutorialPanel);
     public void ShowInGameUI() => SetPanel(inGamePanel);
     public void ShowDialogUI() => SetPanel(dialogPanel);
     public void ShowGameOverUI() => SetPanel(gameOverPanel);
+    public void ShowRankUI() => SetPanel(rankingPanel);
 
     private void SetPanel(GameObject panelToActivate)
     {
@@ -45,6 +51,7 @@ public class UIManager : MonoBehaviour
         dialogPanel.SetActive(false);
         gameOverPanel.SetActive(false);
         settingPanel.SetActive(false);
+        rankingPanel.SetActive(false);
 
         panelToActivate.SetActive(true);
     }
@@ -95,4 +102,18 @@ public class UIManager : MonoBehaviour
     {
         SceneLoader.Instance.LoadScene("MainMenuScene");
     }
+
+    public void ShowRankingProcess()
+    {
+        ShowRankUI(); // 패널만 띄우고
+        if (rankingManager != null)
+            rankingManager.nicknameInput.text = "익명";
+    }
+
+    public void OnSubmitNickname()
+    {
+        if (rankingManager != null)
+            rankingManager.SubmitScore(GetScore());
+    }
+
 }
