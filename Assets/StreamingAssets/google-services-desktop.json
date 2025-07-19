@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "399409627496",
+    "project_id": "trapfall",
+    "storage_bucket": "trapfall.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399409627496:android:7b04970245e773683e16dd",
+        "android_client_info": {
+          "package_name": "com.debog.trapfall"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt-uKmqESupcmAAQDab9h5IKn0_GKJa5Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
