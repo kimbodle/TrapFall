@@ -152,6 +152,7 @@ RectTransform:
   - {fileID: 1909522058}
   - {fileID: 117840451}
   - {fileID: 1636968948}
+  - {fileID: 1271381232}
   - {fileID: 716342943}
   - {fileID: 807619480}
   m_Father: {fileID: 1473140225}
@@ -211,7 +212,7 @@ GameObject:
   - component: {fileID: 117840453}
   - component: {fileID: 117840452}
   m_Layer: 5
-  m_Name: BestScoreLabel
+  m_Name: MyLankLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,10 +258,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BestScore
+  m_text: RANK
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9fa39981f56ac98418beb4e15ea17aea, type: 2}
+  m_sharedMaterial: {fileID: 7988605508380992905, guid: 9fa39981f56ac98418beb4e15ea17aea, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -602,8 +603,9 @@ MonoBehaviour:
   gameOverPanel: {fileID: 1473140222}
   settingPanel: {fileID: 1899568581}
   rankingPanel: {fileID: 1589697198}
+  gradeText: {fileID: 968813983}
   gameOverScoreText: {fileID: 1271381233}
-  gameOverBestScoreText: {fileID: 968813983}
+  NickNameText: {fileID: 1636968949}
   inGameScoreText: {fileID: 2013787001}
   inGameTimeText: {fileID: 1000074779}
   inGameRoundText: {fileID: 762545096}
@@ -2104,7 +2106,7 @@ GameObject:
   - component: {fileID: 968813984}
   - component: {fileID: 968813983}
   m_Layer: 5
-  m_Name: BestScoreText
+  m_Name: LankText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2153,8 +2155,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9fa39981f56ac98418beb4e15ea17aea, type: 2}
+  m_sharedMaterial: {fileID: 7988605508380992905, guid: 9fa39981f56ac98418beb4e15ea17aea, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3123,11 +3125,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1636968948}
+  m_Father: {fileID: 25005298}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 317, y: 3}
+  m_AnchoredPosition: {x: 227, y: -120}
   m_SizeDelta: {x: 309.486, y: 159.486}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1271381233
@@ -3154,8 +3156,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9fa39981f56ac98418beb4e15ea17aea, type: 2}
+  m_sharedMaterial: {fileID: 7988605508380992905, guid: 9fa39981f56ac98418beb4e15ea17aea, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3617,7 +3619,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1473140223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3999,7 +4001,7 @@ GameObject:
   - component: {fileID: 1636968950}
   - component: {fileID: 1636968949}
   m_Layer: 5
-  m_Name: ScoreLabel
+  m_Name: NickNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4016,8 +4018,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1271381232}
+  m_Children: []
   m_Father: {fileID: 25005298}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4045,10 +4046,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Score
+  m_text: SCORE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9fa39981f56ac98418beb4e15ea17aea, type: 2}
+  m_sharedMaterial: {fileID: 7988605508380992905, guid: 9fa39981f56ac98418beb4e15ea17aea, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

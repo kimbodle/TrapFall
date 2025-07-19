@@ -26,6 +26,7 @@ public class RankingManager : MonoBehaviour
     public Transform rankContentParent;
     public GameObject rankItemPrefab;
 
+    private string currenNickname = "";
     private FirebaseFirestore db;
     private UIManager uiManager;
 
@@ -57,12 +58,11 @@ public class RankingManager : MonoBehaviour
         string nickname = nicknameInput.text.Trim();
         if (string.IsNullOrEmpty(nickname))
         {
-            Debug.LogWarning("닉네임을 입력하세요.");
             return;
         }
 
         nickname = GenerateUniqueNickname(nickname);
-
+        currenNickname = nickname;
         var data = new Dictionary<string, object>
         {
             { "nickname", nickname },
@@ -73,7 +73,6 @@ public class RankingManager : MonoBehaviour
         {
             if (task.IsCompletedSuccessfully)
             {
-                Debug.Log($"{nickname} 점수 저장 완료!");
                 rankInputBg.SetActive(false);
                 LoadTopRanking();
             }
@@ -103,7 +102,6 @@ public class RankingManager : MonoBehaviour
                   {
                       string nickname = doc.GetValue<string>("nickname");
                       int score = doc.GetValue<int>("score");
-                      Debug.Log(nickname);
                       allScores.Add(new RankingData(nickname, score));
                   }
 
@@ -138,6 +136,12 @@ public class RankingManager : MonoBehaviour
             lastScore = data.score;
             realRank++;
         }
+        int myScore = uiManager.GetScore();
+        int myRank = GetMyRank(currenNickname, myScore, sortedList);
+
+        uiManager.SetMyGrade(myRank);
+        uiManager.SetGameOverInfo(currenNickname, myScore, myRank);
+        uiManager.ShowGameOverUI();
     }
 
 

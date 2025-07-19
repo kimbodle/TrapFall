@@ -14,8 +14,9 @@ public class UIManager : MonoBehaviour
     public GameObject rankingPanel;
 
     [Header("UI Elements")]
+    public TextMeshProUGUI gradeText;
     public TextMeshProUGUI gameOverScoreText;
-    public TextMeshProUGUI gameOverBestScoreText;
+    public TextMeshProUGUI NickNameText;
 
     [Header("UI Elements")]
     public TextMeshProUGUI inGameScoreText;
@@ -26,6 +27,7 @@ public class UIManager : MonoBehaviour
     public RankingManager rankingManager;
 
     private int currentScore = 0;
+    private int myGrade = 0;
 
 
     private void Start()
@@ -54,13 +56,22 @@ public class UIManager : MonoBehaviour
 
         panelToActivate.SetActive(true);
     }
+    public void SetGameOverInfo(string nickname, int score, int rank)
+    {
+        if (gradeText != null)
+            gradeText.text = $"{rank}등";
 
+        if (NickNameText != null)
+            NickNameText.text = $"{nickname}님의 점수:";
+        if (gameOverScoreText != null)
+            gameOverScoreText.text = $"{score} 점";
+    }
 
     public void UpdateScore(int score)
     {
         currentScore = score;
 
-        if (gameOverScoreText != null) gameOverScoreText.text = $"{score}";
+        if (gradeText != null) gradeText.text = $"{myGrade}";
         if (inGameScoreText != null) inGameScoreText.text = $"{score}";
     }
 
@@ -76,16 +87,6 @@ public class UIManager : MonoBehaviour
     public int GetScore()
     {
         return currentScore;
-    }
-
-    public void OnClickStartGame()
-    {
-        //SceneLoader.Instance.StartGame();
-    }
-
-    public void OnClickReturnToMenu()
-    {
-        //SceneLoader.Instance.ReturnToMainMenu();
     }
 
     public void OnClickExitGame()
@@ -120,6 +121,11 @@ public class UIManager : MonoBehaviour
             Debug.Log("랭킹 매니저 SubmitScore 호출");
             rankingManager.SubmitScore(GetScore());
         }
+    }
+
+    public void SetMyGrade(int grade)
+    {
+        myGrade=grade;
     }
 
 }
