@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -39,7 +39,7 @@ public class SoundManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject); // Áßº¹ ¹æÁö
+            Destroy(gameObject); // ì¤‘ë³µ ë°©ì§€
             return;
         }
         Instance = this;
@@ -49,7 +49,7 @@ public class SoundManager : MonoBehaviour
         BGMDict[BGMType.Tutorial] = bgmTutorial;
         BGMDict[BGMType.Game] = bgmGame;
 
-        // Å¬¸³ µî·Ï (enumÀ¸·Î)
+        // í´ë¦½ ë“±ë¡ (enumìœ¼ë¡œ)
         sfxDict[SFXType.Jump] = sfxJump;
         sfxDict[SFXType.Walk] = sfxWalk;
         sfxDict[SFXType.TileDestroy] = sfxTileDestroy;
@@ -76,15 +76,18 @@ public class SoundManager : MonoBehaviour
                 break;
             case "InGameScene":
                 PlayBGM(BGMType.Tutorial);
-                //Æ©Åä¸®¾ó ÆÇ³Ú Å¬·ÎÁî ¹öÆ° ´©¸£Ã ÀÎ°ÔÀÓ ºê±İ Àç»ıÇÏ±â
+                //íŠœí† ë¦¬ì–¼ íŒë„¬ í´ë¡œì¦ˆ ë²„íŠ¼ ëˆ„ë¥´ë¨„ ì¸ê²Œì„ ë¸Œê¸ˆ ì¬ìƒí•˜ê¸°
                 break;
             default:
-                Debug.LogWarning($"[SoundManager] ¾Ë ¼ö ¾ø´Â ¾À ÀÌ¸§: {scene.name}");
+                Debug.LogWarning($"[SoundManager] ì•Œ ìˆ˜ ì—†ëŠ” ì”¬ ì´ë¦„: {scene.name}");
                 break;
         }
     }
 
-
+    public AudioSource GetsfxSource()
+    {
+        return sfxSource;
+    }
 
     private void SetupAudioSources()
     {
@@ -118,13 +121,26 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"[SoundManager] SFX '{key}' ¾øÀ½!");
+            Debug.LogWarning($"[SoundManager] SFX '{key}' ì—†ìŒ!");
         }
     }
 
     public void PlaySFX(AudioClip clip)
     {
         sfxSource.PlayOneShot(clip);
+    }
+
+    public bool IsPlayingClip(AudioSource source, SFXType key)
+    {
+        if (sfxDict.TryGetValue(key, out var clip))
+        {
+            bool isPlaying = source.isPlaying && source.clip == clip;
+            Debug.Log($"â–¶ï¸ ì²´í¬: {key}, isPlaying={source.isPlaying}, clipMatch={(source.clip == clip)}");
+            return isPlaying;
+        }
+
+        Debug.LogWarning($"âŒ SFXType {key} ì—†ìŒ!");
+        return false;
     }
 
     public void PlayBGM(BGMType key, bool loop = true)
@@ -137,7 +153,7 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"[SoundManager] SFX '{key}' ¾øÀ½!");
+            Debug.LogWarning($"[SoundManager] SFX '{key}' ì—†ìŒ!");
         }
     }
 

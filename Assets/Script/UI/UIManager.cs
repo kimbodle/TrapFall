@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     public GameObject inGamePanel;
     public GameObject dialogPanel;
     public GameObject gameOverPanel;
+    public GameObject settingPanel;
 
     [Header("UI Elements")]
     public TextMeshProUGUI gameOverScoreText;
@@ -29,7 +30,7 @@ public class UIManager : MonoBehaviour
         inGamePanel.SetActive(false);
         dialogPanel.SetActive(false);
         gameOverPanel.SetActive(false);
-
+        settingPanel.SetActive(false);
     }
 
     public void ShowTutorialUI() => SetPanel(tutorialPanel);
@@ -43,6 +44,7 @@ public class UIManager : MonoBehaviour
         inGamePanel.SetActive(false);
         dialogPanel.SetActive(false);
         gameOverPanel.SetActive(false);
+        settingPanel.SetActive(false);
 
         panelToActivate.SetActive(true);
     }

@@ -599,6 +599,7 @@ MonoBehaviour:
   inGamePanel: {fileID: 681382830}
   dialogPanel: {fileID: 603985888}
   gameOverPanel: {fileID: 1473140222}
+  settingPanel: {fileID: 1899568581}
   gameOverScoreText: {fileID: 1271381233}
   gameOverBestScoreText: {fileID: 968813983}
   inGameScoreText: {fileID: 2013787001}
@@ -4628,15 +4629,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1077049191751726940, guid: c46f6ce42075365479f60664897689ae, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1077049191751726940, guid: c46f6ce42075365479f60664897689ae, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1077049191751726940, guid: c46f6ce42075365479f60664897689ae, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1077049191751726940, guid: c46f6ce42075365479f60664897689ae, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -4669,6 +4670,22 @@ PrefabInstance:
     - target: {fileID: 2024609735108774162, guid: c46f6ce42075365479f60664897689ae, type: 3}
       propertyPath: m_Name
       value: SettingButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2024609735108774162, guid: c46f6ce42075365479f60664897689ae, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230828420389436563, guid: c46f6ce42075365479f60664897689ae, type: 3}
+      propertyPath: m_text
+      value: Setting
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230828420389436563, guid: c46f6ce42075365479f60664897689ae, type: 3}
+      propertyPath: m_fontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230828420389436563, guid: c46f6ce42075365479f60664897689ae, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 9161536501493002106, guid: c46f6ce42075365479f60664897689ae, type: 3}
       propertyPath: bgmSlider
@@ -5214,7 +5231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1988338721124642957, guid: 0b9df961e8d188b418e3809c05cc9fbe, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7397045128534997740, guid: 0b9df961e8d188b418e3809c05cc9fbe, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

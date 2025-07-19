@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 using System.Collections;
 
@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    SoundManager soundManager;
 
     private float originalSpeed = 0;
     private float slowEndTime = 0f;
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         playerControls.Enable();
+        soundManager = SoundManager.Instance;
     }
 
     private void OnDisable()
@@ -67,7 +69,7 @@ public class PlayerController : MonoBehaviour
         if (!isJumpDisabled && playerControls.Player.Jump.triggered && !bIsJump)
         {
             bIsJump = true; 
-            SoundManager.Instance.PlaySFX(SFXType.Jump);
+            soundManager.PlaySFX(SFXType.Jump);
             StartCoroutine(TemporaryCollisionIgnore());
         }
 
@@ -75,11 +77,11 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("moveY", movement.y);
         animator.SetBool("isMoving", movement.sqrMagnitude > 0.01f);
 
-        // ¸¶Áö¸· ÀÌµ¿ ¹æÇâ ÀúÀå (Á¤È®È÷ 4¹æÇâ ÀÔ·ÂÀÏ ¶§¸¸)
+        // ë§ˆì§€ë§‰ ì´ë™ ë°©í–¥ ì €ì¥ (ì •í™•íˆ 4ë°©í–¥ ì…ë ¥ì¼ ë•Œë§Œ)
         if (movement.x != 0 || movement.y != 0)
         {
             lastMoveDir = movement.normalized;
-            //SoundManager.Instance.PlaySFX(SFXType.Walk);
+            //soundManager.PlaySFX(SFXType.Walk);
 
             animator.SetFloat("LastMoveX", lastMoveDir.x);
             animator.SetFloat("LastMoveY", lastMoveDir.y);
@@ -90,6 +92,16 @@ public class PlayerController : MonoBehaviour
     private void move()
     {
         rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
+
+        if (!soundManager.IsPlayingClip(soundManager.GetsfxSource(), SFXType.Walk))
+        {
+            Debug.Log("ğŸ”Š ê±·ê¸° ì‚¬ìš´ë“œ ì¬ìƒ ì‹œì‘!");
+            soundManager.PlaySFX(SFXType.Walk);
+        }
+        else
+        {
+            Debug.Log("ğŸ” ê±·ê¸° ì‚¬ìš´ë“œ ì´ë¯¸ ì¬ìƒ ì¤‘");
+        }
     }
 
     IEnumerator TemporaryCollisionIgnore()
