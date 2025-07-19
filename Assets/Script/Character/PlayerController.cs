@@ -114,6 +114,7 @@ public class PlayerController : MonoBehaviour
             bIsJump = true; 
             soundManager.PlaySFX(SFXType.Jump);
             StartCoroutine(TemporaryCollisionIgnore());
+            animator.SetTrigger("Jump");
         }
 
         animator.SetFloat("moveX", movement.x);
@@ -140,10 +141,8 @@ public class PlayerController : MonoBehaviour
     IEnumerator TemporaryCollisionIgnore()
     {
         bIsJump = true;
-        spriteRenderer.color = Color.black;
         yield return new WaitForSeconds(0.5f);
         bIsJump = false;
-        spriteRenderer.color = Color.white;
     }
     public void DisableJump(float duration)
     {
@@ -155,12 +154,10 @@ public class PlayerController : MonoBehaviour
     private IEnumerator JumpDisableWatcher(float duration)
     {
         isJumpDisabled = true;
-        spriteRenderer.color = Color.red;
 
         yield return new WaitForSeconds(duration);
 
         isJumpDisabled = false;
-        spriteRenderer.color = Color.white;
     }
     public void ModifySpeed(float multiplier, float duration)
     {
