@@ -77,7 +77,7 @@ public class SoundManager : MonoBehaviour
                 break;
             case "InGameScene":
                 PlayBGM(BGMType.Tutorial);
-                //튜토리얼 판넬 클로즈 버튼 누르먄 인게임 브금 재생하기
+                //튜토리얼 판넬 클로즈 버튼 누르먄 (인게임 브금 재생하기) -> 게임 시작하기에 포함
                 break;
             default:
                 Debug.LogWarning($"[SoundManager] 알 수 없는 씬 이름: {scene.name}");

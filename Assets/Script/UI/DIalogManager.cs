@@ -17,12 +17,15 @@ public class DialogManager : MonoBehaviour
 
     private void Start()
     {
-        StartDialog(tutorialDialog);
+        //StartDialog(tutorialDialog);
     }
 
-    public void StartDialog(DialogData data)
+    
+
+    public void StartDialog()
     {
-        currentDialog = data;
+        Debug.Log("스토리 시작");
+        currentDialog = tutorialDialog;
         currentLine = 0;
         uiManager.ShowDialogUI();
         ShowLine();
@@ -46,6 +49,8 @@ public class DialogManager : MonoBehaviour
     {
         characterImage.sprite = currentDialog.characterSprite;
         dialogText.text = currentDialog.dialogLines[currentLine];
+
+        Debug.Log(dialogText.text);
     }
 
     private void EndDialog()

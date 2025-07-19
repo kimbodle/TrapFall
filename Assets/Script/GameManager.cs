@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public RoundCsvLoader roundCsvLoader;
     public UIManager uiManager;
     public SpawnManager spawnManager;
+    public DialogManager dialogManager;
 
     private List<RoundData> rounds = new List<RoundData>();
     private List<Coroutine> activeSpawnCoroutines = new List<Coroutine>();
@@ -45,13 +46,24 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         uiManager = GetComponentInChildren<UIManager>();
+        dialogManager = GetComponentInChildren<DialogManager>();
     }
 
     private void Start()
     {
         InitRounds();
         //게임 시작 함수
-        GameStart();
+        if (PlayerPrefs.HasKey("HaveStory") && PlayerPrefs.GetInt("HaveStory") == 2)
+        {
+            Debug.Log("스토리 봄");
+            GameStart();
+        }
+        else
+        {
+            Debug.Log("스토리 안봄");
+            // 처음이면 스토리 보여주기
+            ShowStory();
+        }
     }
 
     private void Update()
@@ -74,8 +86,16 @@ public class GameManager : MonoBehaviour
         //    }
         //}
     }
+    public void ShowStory()
+    {
+        dialogManager.StartDialog();
+        PlayerPrefs.SetInt("HaveStory", 1);
+        PlayerPrefs.Save();
+
+    }
     public void GameStart()
     {
+        
         SoundManager.Instance.PlayBGM(BGMType.Game);
         uiManager.ShowInGameUI();
         StartCoroutine(RoundLoop());

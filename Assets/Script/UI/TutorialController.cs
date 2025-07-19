@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class TutorialController : MonoBehaviour
 {
+
     [SerializeField] Image TutorialImage;
     [SerializeField] Button leftButton;
     [SerializeField] Button rightButton;
