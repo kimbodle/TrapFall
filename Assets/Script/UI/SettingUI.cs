@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting;
+﻿using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class SettingUI : MonoBehaviour
             // 확인/취소 -> 메인메뉴/계속하기
     [SerializeField] private Button settingButton;
     [SerializeField] private GameObject settingPanel;
+
     void Start()
     {
         settingButton.onClick.AddListener(ActiveSettingUI);
@@ -22,5 +24,4 @@ public class SettingUI : MonoBehaviour
     {
         settingPanel.SetActive(false);
     }
-
 }
