@@ -5,8 +5,6 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager Instance { get; private set; }
-
     [Header("Panels")]
     public GameObject tutorialPanel;
     public GameObject inGamePanel;
@@ -22,6 +20,8 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI inGameScoreText;
     public TextMeshProUGUI inGameTimeText;
     public TextMeshProUGUI inGameRoundText;
+
+    private int currentScore = 0;
 
 
     private void Start()
@@ -51,6 +51,8 @@ public class UIManager : MonoBehaviour
 
     public void UpdateScore(int score)
     {
+        currentScore = score;
+
         if (gameOverScoreText != null) gameOverScoreText.text = $"{score}";
         if (inGameScoreText != null) inGameScoreText.text = $"{score}";
     }
@@ -62,6 +64,11 @@ public class UIManager : MonoBehaviour
     public void UpdateRound(int round)
     {
         if (inGameRoundText != null) inGameRoundText.text = $"{round}";
+    }
+
+    public int GetScore()
+    {
+        return currentScore;
     }
 
     public void OnClickStartGame()
