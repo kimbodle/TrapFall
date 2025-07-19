@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
         movement = playerControls.Player.Move.ReadValue<Vector2>();
         if (isInverted)
             movement.x *= -1;
+            movement.y *= -1;
 
         if (!isJumpDisabled && playerControls.Player.Jump.triggered && !bIsJump)
         {

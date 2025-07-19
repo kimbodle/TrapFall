@@ -103,6 +103,9 @@ public class TileComp : MonoBehaviour
                 gameObject.AddComponent<DangerTileEffect>();
                 StartCoroutine(DestroyTile());
                 break;
+            case TileType.Electric:
+                gameObject.AddComponent<ElectricTileEffect>();
+                break;
             case TileType.Trap:
                 gameObject.AddComponent<TrapTileEffect>();
                 break;

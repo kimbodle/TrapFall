@@ -55,5 +55,6 @@ public class RandomTileEffect : MonoBehaviour, ISpecialTile
     {
         transformed = false;
         timeSinceLastStepped = 0f;
+        StopAllCoroutines();
     }
 }

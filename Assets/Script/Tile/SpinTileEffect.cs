@@ -31,5 +31,6 @@ public class SpinTileEffect : MonoBehaviour, ISpecialTile
     public void ResetTile()
     {
         triggered = false;
+        StopAllCoroutines();
     }
 }

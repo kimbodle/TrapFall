@@ -13,7 +13,7 @@ public class ElectricTileEffect : MonoBehaviour, ISpecialTile
 
         var controller = player.GetComponent<PlayerController>();
         if (controller != null)
-            controller.DisableJump(3f); // 5초간 점프 금지
+            controller.DisableJump(3f);
 
         StartCoroutine(RevertTile());
     }
@@ -30,5 +30,6 @@ public class ElectricTileEffect : MonoBehaviour, ISpecialTile
     public void ResetTile()
     {
         triggered = false;
+        StopAllCoroutines();
     }
 }

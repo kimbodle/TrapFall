@@ -94,7 +94,14 @@ public class TileManager : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                //tiles[x, y].
+                TileComp tile = tiles[x, y];
+
+                foreach (var effect in tile.GetComponents<ISpecialTile>())
+                {
+                    effect.ResetTile();
+                }
+
+                tile.StopAllCoroutines();
             }
         }
     }

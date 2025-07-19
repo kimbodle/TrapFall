@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviour
         //그거 검정 페이드인 카메라 연출
         //게임 오버 UI출력
         EndRound() ;
+        StopAllCoroutines();
         tileManager.ResetTiles();
         uiManager.ShowGameOverUI();
     }

@@ -46,5 +46,6 @@ public class FogTileEffect : MonoBehaviour, ISpecialTile
     {
         timeSinceStepped = 0f;
         triggered = false;
+        StopAllCoroutines();
     }
 }

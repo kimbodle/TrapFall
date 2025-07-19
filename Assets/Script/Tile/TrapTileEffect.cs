@@ -35,6 +35,7 @@ public class TrapTileEffect : MonoBehaviour, ISpecialTile
     public void ResetTile()
     {
         triggered = false;
+        StopAllCoroutines();
     }
 }
 
