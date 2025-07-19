@@ -2195,7 +2195,7 @@ MonoBehaviour:
   roundCsvLoader: {fileID: 420394072}
   uiManager: {fileID: 0}
   spawnManager: {fileID: 1691594358}
-  currentRound: 0
+  currentRound: 4
 --- !u!1 &1000074777
 GameObject:
   m_ObjectHideFlags: 0

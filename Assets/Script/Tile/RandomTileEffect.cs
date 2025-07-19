@@ -37,6 +37,8 @@ public class RandomTileEffect : MonoBehaviour, ISpecialTile
     public void Activate(GameObject player)
     {
         timeSinceLastStepped = 0f;
+
+        StartCoroutine(tile.RevertTile());
     }
 
     private void TransformToRandomTile()

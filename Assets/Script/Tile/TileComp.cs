@@ -130,4 +130,9 @@ public class TileComp : MonoBehaviour
                 break;
         }
     }
+    public IEnumerator RevertTile()
+    {
+        yield return new WaitForSeconds(0f); // 타일 1초 후 복구
+        SetTileType(TileType.Normal);
+    }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class DangerTileEffect : MonoBehaviour, ISpecialTile
 {
     private bool triggered = false;
-
+    
     public void Activate(GameObject player)
     {
         if (!triggered)
