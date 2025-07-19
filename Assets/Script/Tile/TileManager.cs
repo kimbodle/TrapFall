@@ -31,7 +31,18 @@ public class TileManager : MonoBehaviour
             {
                 GameObject tileObj = Instantiate(tilePrefab, new Vector3(x + spawnTilePoint.x, y + spawnTilePoint.y, y), Quaternion.identity, this.transform);
                 TileComp tileComp = tileObj.GetComponent<TileComp>();
+                tileComp.nodePosition = new Vector2Int(x, y);
                 tileComp.tileManager = this;
+
+                // 외곽 타일은 충돌 활성화
+                if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
+                {
+                    tileObj.GetComponent<Collider2D>().isTrigger = false; // 충돌 ON
+                    tileComp.isOuterWall = true;
+                    tileObj.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                    tileComp.SetTileType(TileType.Edge);
+                }
+
                 tiles[x, y] = tileComp;
             }
         }
@@ -39,7 +50,7 @@ public class TileManager : MonoBehaviour
 
     TileComp GetTile(Vector2Int coord)
     {
-        if(0 < coord.x && coord.x < width && 0 < coord.y && coord.y < height)
+        if(1 < coord.x && coord.x < width - 1 && 1 < coord.y && coord.y < height - 1)
         {
             return tiles[coord.x,coord.y];
         }
@@ -60,7 +71,22 @@ public class TileManager : MonoBehaviour
         return tiles.Cast<TileComp>().Where(t => t.GetTileType() == TileType.Normal).ToList();
     }
 
+    public List<TileComp> GetEdgeTiles()
+    {
+        List<TileComp> edgeTiles = new List<TileComp>();
 
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
+                {
+                    edgeTiles.Add(tiles[x, y]);
+                }
+            }
+        }
+        return edgeTiles;
+    }
     public void SpawnFogEffectOnRandomTile()
     {
         List<TileComp> allTiles = tiles.Cast<TileComp>().ToList();

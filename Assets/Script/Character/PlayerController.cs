@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour
     }
     public void KnockbackTo(Vector3 targetPos)
     {
+        Debug.Log("플레이어 넉백");
         StartCoroutine(KnockbackRoutine(targetPos));
     }
 

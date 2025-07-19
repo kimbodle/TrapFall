@@ -1,42 +1,42 @@
+ï»¿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StatueWatcher : MonoBehaviour
 {
-    public enum Direction { Up, Down, Left, Right }
-    public Direction lookDirection;
-    public Transform firePoint;
-    public GameObject laserPrefab;
-    public float delayBeforeFire = 3f;
+    [SerializeField] private GameObject laserPrefab;
+    [SerializeField] private Transform firePoint;
+    private Vector2 shootDir = Vector2.down;
 
-    private void Start()
+    public void SetDirection(Vector2 dir)
     {
-        //LookInDirection(lookDirection);
-        Invoke(nameof(FireLaser), delayBeforeFire);
+        shootDir = dir.normalized;
+
+        // ğŸ”„ firePointì˜ ë¡œì»¬ íšŒì „ë§Œ ì¡°ì • (ë¶€ëª¨ì¸ ì„ìƒì€ íšŒì „ ì•ˆ í•¨)
+        float angle = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg;
+        firePoint.localRotation = Quaternion.Euler(0, 0, angle);
     }
 
-    private void FixedUpdate()
+    private void OnEnable()
     {
-        
+        StartCoroutine(FireLaserAfterDelay(3f));
     }
 
-
-    private void LookInDirection(Direction dir)
+    IEnumerator FireLaserAfterDelay(float delay)
     {
-        Vector3 dirVec = Vector3.zero;
-        switch (dir)
-        {
-            case Direction.Up: dirVec = Vector3.up; break;
-            case Direction.Down: dirVec = Vector3.down; break;
-            case Direction.Left: dirVec = Vector3.left; break;
-            case Direction.Right: dirVec = Vector3.right; break;
-        }
-
-        transform.up = dirVec; // ¼®»ó È¸Àü
+        yield return new WaitForSeconds(delay);
+        FireLaser();
+        yield return new WaitForSeconds(2f);
+        gameObject.SetActive(false);
     }
 
     private void FireLaser()
     {
-        Vector3 startPos = firePoint.position; // ¿©±â¼­ nullÀÌ¸é ¿À·ù ¹ß»ı
-        Instantiate(laserPrefab, firePoint.position, firePoint.rotation);
+        GameObject laser = Instantiate(
+            laserPrefab,
+            firePoint.position,
+            Quaternion.identity
+        );
+        laser.GetComponent<Laser>().Init(shootDir);
     }
 }

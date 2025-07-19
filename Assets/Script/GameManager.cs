@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour
     {
         InitRounds();
         //게임 시작 함수
-        if (PlayerPrefs.HasKey("HaveStory") && PlayerPrefs.GetInt("HaveStory") == 2)
+        if (PlayerPrefs.HasKey("HaveStory") && PlayerPrefs.GetInt("HaveStory") == 1)
         {
             Debug.Log("스토리 봄");
             GameStart();
@@ -116,6 +117,8 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             currentRound++;
+            currentRound = math.min(currentRound, 15);
+
             uiManager.UpdateRound(currentRound);
             Debug.Log($"[Round {currentRound}] 시작");
 
@@ -185,7 +188,7 @@ public class GameManager : MonoBehaviour
             }
             else if (typeof(T) == typeof(SpecialObjectType))
             {
-                //spawnManager.SpawnObject((SpecialObjectType)(object)type);
+                spawnManager.SpawnObject((SpecialObjectType)(object)type);
             }
             else
             {

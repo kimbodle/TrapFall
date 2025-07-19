@@ -32,7 +32,8 @@ public enum TileType
     Electric = 5,
     Fog = 6,
     Random = 7,
-    Destroyed = 8
+    Destroyed = 8, 
+    Edge = 9
 }
 public enum SpecialObjectType
 {

@@ -1,39 +1,34 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    public float length = 20f;
-    public float duration = 0.2f;
-    public LayerMask playerLayer;
-    public LineRenderer lineRenderer;
-
-    private void Start()
+    public float speed = 15f;
+    private Vector2 direction;
+    public void Init(Vector2 dir)
     {
-        Vector3 dir = transform.up;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, length, playerLayer);
-        Vector3 endPos = transform.position + dir * length;
-
-        if (hit.collider != null && hit.collider.CompareTag("Player"))
-        {
-            PlayerController player = hit.collider.GetComponent<PlayerController>();
-            if (player != null)
-            {
-                Vector3 knockDir = -dir;
-                Vector3 targetPos = GameManager.Instance.tileManager.GetLastTilePositionInDirection(player.transform.position, knockDir);
-                player.KnockbackTo(targetPos);
-            }
-
-            endPos = hit.point;
-        }
-
-        DrawLaser(endPos);
-        Destroy(gameObject, duration);
+        Debug.Log("laser위치" + dir.ToString());
+        direction = dir;
+        Destroy(gameObject, 2f); // 일정 시간 후 제거
     }
 
-    private void DrawLaser(Vector3 end)
+    private void Update()
     {
-        if (lineRenderer == null) return;
-        lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, end);
+        transform.Translate(direction * speed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Vector2 knockbackDir = direction;
+            Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.AddForce(knockbackDir * 3000f, ForceMode2D.Force); // 넉백
+            }
+
+            Destroy(gameObject);
+        }
     }
 }

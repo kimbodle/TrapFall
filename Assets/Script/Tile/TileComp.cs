@@ -13,16 +13,18 @@ public class TileComp : MonoBehaviour
     public float recoveryTileTime = 3.0f;
     public TileManager tileManager;
     public Animation breakAnimation;
+    public bool isOuterWall = false;  // ← 여기 추가
 
-    Vector2 worldPosition;
+    public Vector2Int nodePosition;
     [SerializeField]
     TileType currentTileType = TileType.Normal;
     SpriteRenderer spriteRenderer;
 
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        breakAnimation = GetComponent<Animation>();
+        breakAnimation = GetComponent<Animation>();//
     }
 
     //밟았다고 치고
