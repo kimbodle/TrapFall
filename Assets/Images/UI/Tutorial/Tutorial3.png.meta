@@ -142,331 +142,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Group 98_0
+      name: Tutorial3_0
       rect:
         serializedVersion: 2
-        x: 187
-        y: 853
-        width: 51
-        height: 35
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c27ef7e823ae02a00800000000000000
-      internalID: 729840642494031660
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Group 98_1
-      rect:
-        serializedVersion: 2
-        x: 244
-        y: 832
-        width: 62
-        height: 56
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cd2d01b0063571c40800000000000000
-      internalID: 5482942743314485980
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Group 98_2
-      rect:
-        serializedVersion: 2
-        x: 307
-        y: 832
-        width: 40
-        height: 56
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 507ed407249b4d170800000000000000
-      internalID: 8202384516351649541
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Group 98_3
-      rect:
-        serializedVersion: 2
-        x: 350
-        y: 827
-        width: 13
-        height: 61
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c282e7ef4189f3e80800000000000000
-      internalID: -8196665580854564820
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Group 98_4
-      rect:
-        serializedVersion: 2
-        x: 370
-        y: 859
-        width: 56
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b4f51c38f49d583b0800000000000000
-      internalID: -5510759633481801909
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Group 98_5
-      rect:
-        serializedVersion: 2
-        x: 458
-        y: 827
-        width: 40
-        height: 61
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e84484589a7b26d30800000000000000
-      internalID: 4423299722744710286
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Group 98_6
-      rect:
-        serializedVersion: 2
-        x: 182
-        y: 827
-        width: 61
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d396958faeef316e0800000000000000
-      internalID: -1867869135286212291
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Group 98_7
-      rect:
-        serializedVersion: 2
-        x: 375
-        y: 827
-        width: 51
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0b3ff0b0c92e9b8e0800000000000000
-      internalID: -1677060226390428752
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Group 98_8
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 401
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5d0c383bcd28043b0800000000000000
-      internalID: -5530276457994796843
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Group 98_9
-      rect:
-        serializedVersion: 2
-        x: 37
-        y: 343
-        width: 75
-        height: 114
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 278bc559dd535c3a0800000000000000
-      internalID: -6645846449305372558
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Group 98_10
-      rect:
-        serializedVersion: 2
-        x: 162
+        x: 0
         y: 0
-        width: 1419
-        height: 797
+        width: 581
+        height: 893
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: fd27f93e20a5412e0800000000000000
-      internalID: -2155999353148312865
+      spriteID: 7e95a5e7e18b6004eb5ebd7193051b17
+      internalID: 854604522
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Group 98_11
+      name: Tutorial3_1
       rect:
         serializedVersion: 2
-        x: 1632
-        y: 343
-        width: 75
-        height: 114
+        x: 163
+        y: 0
+        width: 1415
+        height: 893
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1681979bc689c3ab0800000000000000
-      internalID: -5026975491316705183
+      spriteID: d05fa191383080d439b50c0d7290453c
+      internalID: -1302722342
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Group 98_12
+      name: Tutorial3_2
       rect:
         serializedVersion: 2
-        x: 1704
-        y: 401
-        width: 6
-        height: 6
+        x: 1162
+        y: 0
+        width: 581
+        height: 893
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 411eba846999bc950800000000000000
-      internalID: 6470434160391217428
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Group 98_13
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 388
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7f3a2ff5c3e0dc640800000000000000
-      internalID: 5101749605351203831
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Group 98_14
-      rect:
-        serializedVersion: 2
-        x: 1704
-        y: 388
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 83a6ea3716b9a2090800000000000000
-      internalID: -8058457740371137992
+      spriteID: 9ad6347bbeaafeb4fbc334947e3df0ec
+      internalID: -2024391710
       vertices: []
       indices: 
       edges: []
@@ -483,23 +219,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":1.0},"gridSpriteSize":{"x":581.0,"y":893.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Group 98_0: 729840642494031660
-      Group 98_1: 5482942743314485980
-      Group 98_10: -2155999353148312865
-      Group 98_11: -5026975491316705183
-      Group 98_12: 6470434160391217428
-      Group 98_13: 5101749605351203831
-      Group 98_14: -8058457740371137992
-      Group 98_2: 8202384516351649541
-      Group 98_3: -8196665580854564820
-      Group 98_4: -5510759633481801909
-      Group 98_5: 4423299722744710286
-      Group 98_6: -1867869135286212291
-      Group 98_7: -1677060226390428752
-      Group 98_8: -5530276457994796843
-      Group 98_9: -6645846449305372558
+      Tutorial3_0: 854604522
+      Tutorial3_1: -1302722342
+      Tutorial3_2: -2024391710
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

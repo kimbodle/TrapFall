@@ -32,7 +32,7 @@ public class TutorialController : MonoBehaviour
 
     void OnClickRightButton()
     {
-        if (index == 2) { return; }
+        if (index == TutorialImages.Length) { return; }
         TutorialImage.sprite = TutorialImages[index + 1];
         index++;
     }
