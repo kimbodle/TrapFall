@@ -37,6 +37,20 @@ public class RankingManager : MonoBehaviour
     private void Start()
     {
         uiManager = GetComponent<UIManager>();
+
+        Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+        {
+            var result = task.Result;
+            if (result == Firebase.DependencyStatus.Available)
+            {
+                db = FirebaseFirestore.DefaultInstance;
+                Debug.Log("Firebase 초기화 완료됨");
+            }
+            else
+            {
+                Debug.LogError($"Firebase 초기화 실패: {result}");
+            }
+        });
     }
     public void PrepareNicknameInput()
     {
@@ -110,6 +124,10 @@ public class RankingManager : MonoBehaviour
                   
                   ShowRankingList(allScores);
               }
+              else
+              {
+                  Debug.Log("IsCompletedSuccessfully 실패");
+              }
           });
     }
     public void ShowRankingList(List<RankingData> sortedList)
@@ -141,7 +159,6 @@ public class RankingManager : MonoBehaviour
 
         uiManager.SetMyGrade(myRank);
         uiManager.SetGameOverInfo(currenNickname, myScore, myRank);
-        uiManager.ShowGameOverUI();
     }
 
 
