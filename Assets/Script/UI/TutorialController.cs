@@ -19,6 +19,7 @@ public class TutorialController : MonoBehaviour
         leftButton.onClick.AddListener(OnClickLeftButton);
         rightButton.onClick.AddListener(OnClickRightButton);
         closeButton.onClick.AddListener(OnClickCloseButton);
+        playButton.onClick.AddListener(OnClickCloseButton);
 
         TutorialImage.sprite = TutorialImages[index];
         UpdateUI();
@@ -43,6 +44,7 @@ public class TutorialController : MonoBehaviour
     {
         //Todo: 게임 매니저 메소드 호출(인게임 UI띄우고 게임 시작하기)
         gameObject.SetActive(false);
+        GameManager.Instance.GameStart();
     }
     private void UpdateUI()
     {
@@ -50,6 +52,7 @@ public class TutorialController : MonoBehaviour
         {
             case 0:
                 leftButton.gameObject.SetActive(false);
+                playButton.gameObject.SetActive(false);
                 break;
             case 4:
                 rightButton.gameObject.SetActive(false);
@@ -59,6 +62,7 @@ public class TutorialController : MonoBehaviour
             default:
                 leftButton.gameObject.SetActive(true);
                 rightButton.gameObject.SetActive(true);
+                playButton.gameObject.SetActive(false);
                 break;
         }
     }

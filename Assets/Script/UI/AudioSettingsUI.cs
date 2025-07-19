@@ -47,7 +47,7 @@ public class AudioSettingsUI : MonoBehaviour
     private void OnPreviewSFXVolume(float value)
     {
         SFXTextVolume.text = $"{(int)(value * 100)}";
-        SoundManager.Instance.SetBGMVolume(value);
+        SoundManager.Instance.SetSFXVolume(value);
     }
 
     public void OnClickApply()
@@ -66,7 +66,14 @@ public class AudioSettingsUI : MonoBehaviour
 
         UpdateVolumeText();
     }
-
+    public void OnClickReturnMenu()
+    {
+        SceneLoader.Instance.LoadScene("MainMenuScene");
+    }
+    public void OnClickContinue()
+    {
+        gameObject.SetActive(false);
+    }
     private void UpdateVolumeText()
     {
         if (BGMTextVolume == null || SFXTextVolume == null) return; 

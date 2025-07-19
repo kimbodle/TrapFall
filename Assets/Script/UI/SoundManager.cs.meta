@@ -6,11 +6,12 @@ MonoImporter:
   defaultReferences:
   - bgmSource: {instanceID: 0}
   - sfxSource: {instanceID: 0}
+  - bgmMainMenu: {instanceID: 0}
   - bgmTutorial: {instanceID: 0}
   - bgmGame: {fileID: 8300000, guid: ca59b933814d1c74b90e9fae59b42456, type: 3}
   - sfxJump: {fileID: 8300000, guid: dd9d6d178135d6d46a2d3e411069b710, type: 3}
-  - sfxWalk: {instanceID: 0}
-  - sfxTileDestroy: {instanceID: 0}
+  - sfxWalk: {fileID: 8300000, guid: 178225372484433468b7ebfad28edb2b, type: 3}
+  - sfxTileDestroy: {fileID: 8300000, guid: fabfa0d08c1134f4b896bdef8ec45e53, type: 3}
   - sfxRelicGet: {fileID: 8300000, guid: af9e8f3ee53336448933e2abc6a874df, type: 3}
   - sfxNextRound: {fileID: 8300000, guid: 16e668d31982d854da05fce9fe4f1f02, type: 3}
   - sfxGameOver: {fileID: 8300000, guid: 739fecd0924447e44b7f390580580509, type: 3}
