@@ -40,6 +40,7 @@ public class FogTileEffect : MonoBehaviour, ISpecialTile
     public void Activate(GameObject player)
     {
         timeSinceStepped = 0f; // 플레이어가 밟으면 초기화
+        tile.RevertTile();
     }
 
     public void ResetTile()
