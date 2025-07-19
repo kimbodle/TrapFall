@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2240556049490256186}
   - component: {fileID: 8490245625597789430}
-  - component: {fileID: -4108144026847172795}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -47,8 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgmSource: {fileID: 0}
   sfxSource: {fileID: 0}
-  bgmMainMenu: {fileID: 0}
-  bgmTutorial: {fileID: 0}
+  bgmMainMenu: {fileID: 8300000, guid: ca59b933814d1c74b90e9fae59b42456, type: 3}
+  bgmTutorial: {fileID: 8300000, guid: ca59b933814d1c74b90e9fae59b42456, type: 3}
   bgmGame: {fileID: 8300000, guid: ca59b933814d1c74b90e9fae59b42456, type: 3}
   sfxJump: {fileID: 8300000, guid: dd9d6d178135d6d46a2d3e411069b710, type: 3}
   sfxWalk: {fileID: 0}
@@ -57,17 +56,5 @@ MonoBehaviour:
   sfxNextRound: {fileID: 8300000, guid: 16e668d31982d854da05fce9fe4f1f02, type: 3}
   sfxGameOver: {fileID: 8300000, guid: 739fecd0924447e44b7f390580580509, type: 3}
   sfxBestScore: {fileID: 8300000, guid: ded8df61ad8b71a4e8bc63ef36be7768, type: 3}
---- !u!114 &-4108144026847172795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5747700349893363387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93c8781a615192549bfeb5c6d414ddeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bgmSlider: {fileID: 0}
-  sfxSlider: {fileID: 0}
+  defaultBGMVolume: 0.5
+  defaultSFXVolume: 1

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum BGMType { MainMenu, Tutorial, Game }
 public enum SFXType { Jump, Walk, TileDestroy, RelicGet, GameOver, NextRound, BestScore }
@@ -44,6 +45,7 @@ public class SoundManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         SetupAudioSources();
+        BGMDict[BGMType.MainMenu] = bgmMainMenu;
         BGMDict[BGMType.Tutorial] = bgmTutorial;
         BGMDict[BGMType.Game] = bgmGame;
 
@@ -56,6 +58,33 @@ public class SoundManager : MonoBehaviour
         sfxDict[SFXType.NextRound] = sfxNextRound;
         sfxDict[SFXType.BestScore] = sfxBestScore;
     }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        switch (scene.name)
+        {
+            case "MainMenuScene":
+                PlayBGM(BGMType.MainMenu);
+                break;
+            case "InGameScene":
+                PlayBGM(BGMType.Tutorial);
+                //튜토리얼 판넬 클로즈 버튼 누르먄 인게임 브금 재생하기
+                break;
+            default:
+                Debug.LogWarning($"[SoundManager] 알 수 없는 씬 이름: {scene.name}");
+                break;
+        }
+    }
+
+
 
     private void SetupAudioSources()
     {

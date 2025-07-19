@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class AudioSettingsUI : MonoBehaviour
 {
-    //Todo: Ingamescene에서도 연결 필요
-        //GameManager에서 현재 씬에 따라 브금 재생 필요
     public Slider bgmSlider;
     public Slider sfxSlider;
 
@@ -14,10 +12,6 @@ public class AudioSettingsUI : MonoBehaviour
     {
         if (bgmSlider != null && sfxSlider != null) {
             StartCoroutine(InitVolumeSliders());
-            if(SceneManager.GetActiveScene().name == "MainMenuScene")
-            {
-                SoundManager.Instance.PlayBGM(BGMType.MainMenu);
-            }
         }
     }
 
