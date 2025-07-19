@@ -69,7 +69,11 @@ public class MainMenuRankingViewer : MonoBehaviour
                 currentRank = realRank;
 
             GameObject item = Instantiate(rankItemPrefab, rankContentParent);
-            item.GetComponentInChildren<TMP_Text>().text = $"{currentRank}등 : {data.nickname} / 점수: {data.score}";
+            Transform rankText = item.transform.GetChild(0); // 첫 번째 자식
+            Transform nicknameText = item.transform.GetChild(1); // 두 번째 자식
+
+            rankText.GetComponent<TMP_Text>().text = $"{currentRank}";
+            nicknameText.GetComponent<TMP_Text>().text = $"{data.nickname} / 점수: {data.score}";
 
             lastScore = data.score;
             realRank++;
