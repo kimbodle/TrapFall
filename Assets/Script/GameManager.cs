@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     {
         InitRounds();
         //게임 시작 함수
-        if (PlayerPrefs.HasKey("HaveStory") && PlayerPrefs.GetInt("HaveStory") == 1)
+        if (PlayerPrefs.HasKey("HaveStory") && PlayerPrefs.GetInt("HaveStory") == 0)
         {
             Debug.Log("스토리 봄");
             GameStart();
