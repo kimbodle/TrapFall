@@ -17,6 +17,7 @@ public class RoundData
 
 public class GameManager : MonoBehaviour
 {
+    //Todo: 사운드를 위해 InGameScene -> MainMenu로 옮겨야함(추후 점수데이터와 유저 정보에도 필요)
     public static GameManager Instance { get; private set; }
 
     public TileManager tileManager;

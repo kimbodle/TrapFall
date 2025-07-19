@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-    public enum BGMType { Tutorial, Game}
-    public enum SFXType { Jump,Walk,TileDestroy, RelicGet, GameOver,NextRound, BestScore }
+public enum BGMType { MainMenu, Tutorial, Game }
+public enum SFXType { Jump, Walk, TileDestroy, RelicGet, GameOver, NextRound, BestScore }
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager Instance {  get; private set; }
+    public static SoundManager Instance { get; private set; }
 
 
     [Header("Audio Sources")]
@@ -15,6 +14,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource sfxSource;
 
     [Header("Audio Clips, BGM")]
+    public AudioClip bgmMainMenu;
     public AudioClip bgmTutorial;
     public AudioClip bgmGame;
 
@@ -26,6 +26,10 @@ public class SoundManager : MonoBehaviour
     public AudioClip sfxNextRound;
     public AudioClip sfxGameOver;
     public AudioClip sfxBestScore;
+
+    [SerializeField][Range(0f, 1f)] private float defaultBGMVolume = 0.5f;
+    [SerializeField][Range(0f, 1f)] private float defaultSFXVolume = 1f;
+
 
     private Dictionary<BGMType, AudioClip> BGMDict = new();
     private Dictionary<SFXType, AudioClip> sfxDict = new();
@@ -62,7 +66,6 @@ public class SoundManager : MonoBehaviour
             bgmSource = bgmObj.AddComponent<AudioSource>();
             bgmSource.loop = true;
             bgmSource.playOnAwake = false;
-            bgmSource.volume = 0.5f;
         }
 
         if (sfxSource == null)
@@ -71,16 +74,17 @@ public class SoundManager : MonoBehaviour
             sfxObj.transform.SetParent(this.transform);
             sfxSource = sfxObj.AddComponent<AudioSource>();
             sfxSource.playOnAwake = false;
-            sfxSource.volume = 1.0f;
         }
+
+        bgmSource.volume = defaultBGMVolume;
+        sfxSource.volume = defaultSFXVolume;
     }
+
 
     public void PlaySFX(SFXType key)
     {
         if (sfxDict.TryGetValue(key, out var clip))
         {
-            //타일파괴 사운드가 너무커서 볼륨을 줄임 나중에 오디오파일 자체를 수정할것
-            sfxSource.volume = 1;
             sfxSource.PlayOneShot(clip);
         }
         else
@@ -99,7 +103,7 @@ public class SoundManager : MonoBehaviour
         if (BGMDict.TryGetValue(key, out var clip))
         {
             bgmSource.clip = clip;
-            bgmSource.loop = loop;  
+            bgmSource.loop = loop;
             bgmSource.Play();
         }
         else
@@ -112,4 +116,19 @@ public class SoundManager : MonoBehaviour
     {
         bgmSource.Stop();
     }
+    public void SetBGMVolume(float volume)
+    {
+        if (bgmSource == null) { return; }
+        bgmSource.volume = Mathf.Clamp01(volume);
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        if (sfxSource == null) { return; }
+        sfxSource.volume = Mathf.Clamp01(volume);
+    }
+    public float GetBGMVolume() => bgmSource.volume;
+    public float GetSFXVolume() => sfxSource.volume;
+
+
 }
