@@ -111,7 +111,16 @@ public class UIManager : MonoBehaviour
         if (rankingManager != null)
             rankingManager.PrepareNicknameInput();
     }
+    public void ShowTopRanking()
+    {
+        SetPanel(rankingPanel);
 
+        if (rankingManager != null)
+        {
+            rankingManager.LoadTopRanking();
+        }
+            
+    }
 
     public void OnSubmitNickname()
     {
