@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -13,8 +14,13 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverPanel;
 
     [Header("UI Elements")]
-    public Text scoreText;
-    public Text livesText;
+    public TextMeshProUGUI gameOverScoreText;
+    public TextMeshProUGUI gameOverBestScoreText;
+
+    [Header("UI Elements")]
+    public TextMeshProUGUI inGameScoreText;
+    public TextMeshProUGUI inGameTimeText;
+    public TextMeshProUGUI inGameRoundText;
 
 
     private void Start()
@@ -43,16 +49,18 @@ public class UIManager : MonoBehaviour
 
     public void UpdateScore(int score)
     {
-        if (scoreText != null)
-            scoreText.text = $"Score: {score}";
+        if (gameOverScoreText != null) gameOverScoreText.text = $"{score}";
+        if (inGameScoreText != null) inGameScoreText.text = $"{score}";
     }
 
-    public void UpdateLives(int lives)
+    public void UpdateTime(float time)
     {
-        if (livesText != null)
-            livesText.text = $"Lives: {lives}";
+        if (inGameTimeText != null) inGameTimeText.text = $"{(int)time}";
     }
-
+    public void UpdateRound(int round)
+    {
+        if (inGameRoundText != null) inGameRoundText.text = $"{round}";
+    }
 
     public void OnClickStartGame()
     {
@@ -67,5 +75,15 @@ public class UIManager : MonoBehaviour
     public void OnClickExitGame()
     {
         Application.Quit();
+    }
+
+    public void OnClickReStart()
+    {
+        SceneLoader.Instance.LoadScene("InGameScene");
+    }
+
+    public void OnClickMainMenu()
+    {
+        SceneLoader.Instance.LoadScene("MainMenuScene");
     }
 }

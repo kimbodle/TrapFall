@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     int currentRound = 0;
     int currentScore = 0;
+    float currentTime = 0;
 
     private void Awake()
     {
@@ -54,6 +55,12 @@ public class GameManager : MonoBehaviour
         GameStart();
     }
 
+    private void Update()
+    {
+        currentTime += Time.deltaTime;
+        uiManager.UpdateTime(currentTime);
+    }
+
     void InitRounds()
     {
         rounds = roundCsvLoader.LoadRoundsFromCSV();
@@ -71,13 +78,26 @@ public class GameManager : MonoBehaviour
     public void GameStart()
     {
         SoundManager.Instance.PlayBGM(BGMType.Game);
+        uiManager.ShowInGameUI();
         StartCoroutine(RoundLoop());
+        StartCoroutine(CheckTime());
     }
+    IEnumerator CheckTime()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            SetScore(1);
+        }
+    }
+
+
     IEnumerator RoundLoop()
     {
         while (true)
         {
             currentRound++;
+            uiManager.UpdateRound(currentRound);
             Debug.Log($"[Round {currentRound}] 시작");
 
             RoundData roundData = rounds.FirstOrDefault(r => r.round == currentRound);
@@ -176,6 +196,7 @@ public class GameManager : MonoBehaviour
     public void SetScore(int score)
     {
         currentScore += score;
+        uiManager.UpdateScore(currentScore);
         Debug.Log($"{score}");
     }
 }
