@@ -42,8 +42,7 @@ public class UIManager : MonoBehaviour
     public void ShowInGameUI() => SetPanel(inGamePanel);
     public void ShowDialogUI() => SetPanel(dialogPanel);
     public void ShowGameOverUI() => SetPanel(gameOverPanel);
-    public void ShowRankUI() => SetPanel(rankingPanel);
-
+    public void ShowRankUI() => ShowRankingProcess();
     private void SetPanel(GameObject panelToActivate)
     {
         tutorialPanel.SetActive(false);
@@ -55,6 +54,7 @@ public class UIManager : MonoBehaviour
 
         panelToActivate.SetActive(true);
     }
+
 
     public void UpdateScore(int score)
     {
@@ -105,15 +105,21 @@ public class UIManager : MonoBehaviour
 
     public void ShowRankingProcess()
     {
-        ShowRankUI(); // 패널만 띄우고
+        SetPanel(rankingPanel);
+
         if (rankingManager != null)
-            rankingManager.nicknameInput.text = "익명";
+            rankingManager.PrepareNicknameInput();
     }
+
 
     public void OnSubmitNickname()
     {
+        Debug.Log("OnSubmitNickname 호출됨");
         if (rankingManager != null)
+        {
+            Debug.Log("랭킹 매니저 SubmitScore 호출");
             rankingManager.SubmitScore(GetScore());
+        }
     }
 
 }
