@@ -59,12 +59,15 @@ public class PlayerController : MonoBehaviour
     {
         movement = playerControls.Player.Move.ReadValue<Vector2>();
         if (isInverted)
+        {
             movement.x *= -1;
             movement.y *= -1;
+        }
 
         if (!isJumpDisabled && playerControls.Player.Jump.triggered && !bIsJump)
         {
-            bIsJump = true;
+            bIsJump = true; 
+            SoundManager.Instance.PlaySFX(SFXType.Jump);
             StartCoroutine(TemporaryCollisionIgnore());
         }
 
@@ -76,6 +79,7 @@ public class PlayerController : MonoBehaviour
         if (movement.x != 0 || movement.y != 0)
         {
             lastMoveDir = movement.normalized;
+            //SoundManager.Instance.PlaySFX(SFXType.Walk);
 
             animator.SetFloat("LastMoveX", lastMoveDir.x);
             animator.SetFloat("LastMoveY", lastMoveDir.y);

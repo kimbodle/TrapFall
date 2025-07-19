@@ -90,6 +90,8 @@ public class TileComp : MonoBehaviour
     public IEnumerator DestroyTile()
     {
         yield return new WaitForSeconds(1f);
+        //타일 부셔지는 애니메이션 ㄱㄱ
+        SoundManager.Instance.PlaySFX(SFXType.TileDestroy);
         SetTileType(TileType.Destroyed);
 
         yield return new WaitForSeconds(recoveryTileTime);

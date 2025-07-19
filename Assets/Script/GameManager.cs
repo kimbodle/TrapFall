@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [System.Serializable]
 public class RoundData
@@ -21,6 +22,8 @@ public class GameManager : MonoBehaviour
     public TileManager tileManager;
     public RoundCsvLoader roundCsvLoader;
     public UIManager uiManager;
+    public SpawnManager spawnManager;
+
     private List<RoundData> rounds = new List<RoundData>();
     private List<Coroutine> activeSpawnCoroutines = new List<Coroutine>();
 
@@ -28,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     int currentRound = 0;
+    int currentScore = 0;
 
     private void Awake()
     {
@@ -45,7 +49,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         InitRounds();
-        StartCoroutine(RoundLoop());
+        //게임 시작 함수
+        GameStart();
     }
 
     void InitRounds()
@@ -62,7 +67,11 @@ public class GameManager : MonoBehaviour
         //    }
         //}
     }
-
+    public void GameStart()
+    {
+        SoundManager.Instance.PlayBGM(BGMType.Game);
+        StartCoroutine(RoundLoop());
+    }
     IEnumerator RoundLoop()
     {
         while (true)
@@ -72,7 +81,10 @@ public class GameManager : MonoBehaviour
 
             RoundData roundData = rounds.FirstOrDefault(r => r.round == currentRound);
             if (roundData != null)
+            {
+                SoundManager.Instance.PlaySFX(SFXType.NextRound);
                 StartRound(roundData);
+            }
 
             yield return new WaitForSeconds(10f); // 라운드 진행 시간
             EndRound(); // 다음 라운드 전 준비
@@ -85,7 +97,25 @@ public class GameManager : MonoBehaviour
         {
             if (rule.spawnInterval > 0)
             {
-                Coroutine co = StartCoroutine(SpawnTileLoop(rule.tileType, rule.spawnInterval));
+                Coroutine co = StartCoroutine(SpawnLoop<TileType>(rule.tileType, rule.spawnInterval));
+                activeSpawnCoroutines.Add(co);
+            }
+        }
+
+        foreach (var rule in data.objectSpawnRules)
+        {
+            if (rule.spawnInterval > 0)
+            {
+                Coroutine co = StartCoroutine(SpawnLoop<SpecialObjectType>(rule.objectType, rule.spawnInterval));
+                activeSpawnCoroutines.Add(co);
+            }
+        }
+
+        foreach (var rule in data.itemSpawnRules)
+        {
+            if (rule.spawnInterval > 0)
+            {
+                Coroutine co = StartCoroutine(SpawnLoop<ItemType>(rule.itemType, rule.spawnInterval));
                 activeSpawnCoroutines.Add(co);
             }
         }
@@ -97,15 +127,33 @@ public class GameManager : MonoBehaviour
             StopCoroutine(co);
 
         activeSpawnCoroutines.Clear();
+        spawnManager.ResetSpawnedObject();
     }
-    IEnumerator SpawnTileLoop(TileType type, float interval)
+    IEnumerator SpawnLoop<T>(T type, float interval) where T : Enum
     {
         while (true)
         {
             yield return new WaitForSeconds(interval);
-            tileManager.SpawnSpecialTile(type);
+
+            if (typeof(T) == typeof(TileType))
+            {
+                tileManager.SpawnSpecialTile((TileType)(object)type);
+            }
+            else if (typeof(T) == typeof(ItemType))
+            {
+                spawnManager.SpawnItem((ItemType)(object)type);
+            }
+            else if (typeof(T) == typeof(SpecialObjectType))
+            {
+                //spawnManager.SpawnObject((SpecialObjectType)(object)type);
+            }
+            else
+            {
+                Debug.LogWarning($"Unhandled type {typeof(T)}");
+            }
         }
     }
+
     public void GameOver()
     {
         if (isGameOver) return;
@@ -115,9 +163,18 @@ public class GameManager : MonoBehaviour
         // UI, 재시작 등 호출
         //그거 검정 페이드인 카메라 연출
         //게임 오버 UI출력
+
+        SoundManager.Instance.StopBGM();
+        SoundManager.Instance.PlaySFX(SFXType.GameOver);
         EndRound() ;
         StopAllCoroutines();
         tileManager.ResetTiles();
         uiManager.ShowGameOverUI();
+    }
+
+    public void SetScore(int score)
+    {
+        currentScore += score;
+        Debug.Log($"{score}");
     }
 }

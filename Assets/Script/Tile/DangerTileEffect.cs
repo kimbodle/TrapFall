@@ -11,9 +11,9 @@ public class DangerTileEffect : MonoBehaviour, ISpecialTile
             triggered = true;
             // 넉백 테스트
             Debug.Log("DangerTileEffect 발동");
-            Vector3 knockbackDir = (player.transform.position - transform.position).normalized;
-            Debug.Log(knockbackDir);
-            player.GetComponent<Rigidbody2D>().AddForce(knockbackDir * 500f);
+            //Vector3 knockbackDir = (player.transform.position - transform.position).normalized;
+            //Debug.Log(knockbackDir);
+            //player.GetComponent<Rigidbody2D>().AddForce(knockbackDir * 500f);
         }
     }
 

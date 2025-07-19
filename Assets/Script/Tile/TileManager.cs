@@ -29,7 +29,7 @@ public class TileManager : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                GameObject tileObj = Instantiate(tilePrefab, new Vector3(x + spawnTilePoint.x, y + spawnTilePoint.y, 0), Quaternion.identity);
+                GameObject tileObj = Instantiate(tilePrefab, new Vector3(x + spawnTilePoint.x, y + spawnTilePoint.y, 0), Quaternion.identity, this.transform);
                 TileComp tileComp = tileObj.GetComponent<TileComp>();
                 tileComp.tileManager = this;
                 tiles[x, y] = tileComp;
@@ -61,19 +61,6 @@ public class TileManager : MonoBehaviour
     }
 
 
-    public void SpawnFogTile()
-    {
-        var normalTiles = GetNormalTiles();
-        if (normalTiles.Count == 0) return;
-
-        TileComp target = normalTiles[Random.Range(0, normalTiles.Count)];
-
-        if (fogEffectPrefab != null)
-        {
-            GameObject fog = Instantiate(fogEffectPrefab, target.transform.position, Quaternion.identity);
-            Destroy(fog, 3f);
-        }
-    }
     public void SpawnFogEffectOnRandomTile()
     {
         List<TileComp> allTiles = tiles.Cast<TileComp>().ToList();
@@ -83,7 +70,7 @@ public class TileManager : MonoBehaviour
 
         if (fogEffectPrefab != null)
         {
-            GameObject fog = Instantiate(fogEffectPrefab, target.transform.position, Quaternion.identity);
+            GameObject fog = Instantiate(fogEffectPrefab, target.transform.position, Quaternion.identity, this.transform);
             Destroy(fog, 3f);
         }
     }

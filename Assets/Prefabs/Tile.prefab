@@ -104,7 +104,8 @@ MonoBehaviour:
   - {fileID: 7482667652216324306, guid: 0ae1e1b3611550840908cb84ff62cede, type: 3}
   - {fileID: 7482667652216324306, guid: 0ae1e1b3611550840908cb84ff62cede, type: 3}
   randomTileTime: 5
-  recoveryTileTime: 3
+  recoveryTileTime: 1
+  tileManager: {fileID: 0}
   currentTileType: 0
 --- !u!212 &5158120288886646027
 SpriteRenderer:
@@ -149,7 +150,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
