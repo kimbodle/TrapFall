@@ -10,9 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3057c1d398e3047429f981d0d5ba1648, type: 3}
-  m_Name: DialogData
+  m_Name: Tutorial
   m_EditorClassIdentifier: 
-  characterSprite: {fileID: 4132150360196029476, guid: 252cd442e8e86fb41ab260690d1f8080, type: 3}
+  characterImages:
+  - {fileID: 4132150360196029476, guid: 252cd442e8e86fb41ab260690d1f8080, type: 3}
+  - {fileID: -6340527610921354758, guid: 1ac66143f89854f41a7f70045ceb7520, type: 3}
+  - {fileID: 2120563451152964864, guid: ce411ed6b21ce9a40ac9ad3876833782, type: 3}
+  backgroundImages:
+  - {fileID: -9091873768553281914, guid: 44045ba5e35d2ff419e41e56d36ed9d3, type: 3}
+  - {fileID: -768483549258640189, guid: a5761d7155d28d7449ebf1cffe9c90eb, type: 3}
+  - {fileID: -5075801014857408620, guid: 98302a51e0e4b9743973bf37d7625c86, type: 3}
   dialogLines:
   - "\u201C\uB4DC\uB514\uC5B4 \uCC3E\uC558\uB2E4\u2026 \uC804\uC124 \uC18D \uC720\uC801!\u201D"
   - "\u201C\uC218\uBC31 \uB144 \uB3D9\uC548 \uC544\uBB34\uB3C4 \uB3CC\uC544\uC624\uC9C0

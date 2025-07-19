@@ -69,6 +69,7 @@ public class AudioSettingsUI : MonoBehaviour
 
     private void UpdateVolumeText()
     {
+        if (BGMTextVolume == null || SFXTextVolume == null) return; 
         BGMTextVolume.text = $"{(int)(bgmSlider.value * 100)}";
         SFXTextVolume.text = $"{(int)(sfxSlider.value * 100)}";
     }

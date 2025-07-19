@@ -1,26 +1,24 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class DialogManager : MonoBehaviour
 {
     [Header("UI Elements")]
-    [SerializeField] UIManager uiManager;
-    public Image characterImage;
-    public TextMeshProUGUI dialogText;
-    public Button nextButton;
-    [Header("For Debug")]
+    [SerializeField] private UIManager uiManager;
+    [SerializeField] private Image characterImage;
+    [SerializeField] private Image backgroundImage;
+    [SerializeField] private TextMeshProUGUI dialogText;
+    [SerializeField] private Button nextButton;
+
+    [Header("Dialog Data")]
     [SerializeField] private DialogData tutorialDialog;
+
+    [SerializeField] private GameObject dialogUIGroup;
 
     private DialogData currentDialog;
     private int currentLine = 0;
-
-    private void Start()
-    {
-        //StartDialog(tutorialDialog);
-    }
-
-    
 
     public void StartDialog()
     {
@@ -28,12 +26,14 @@ public class DialogManager : MonoBehaviour
         currentDialog = tutorialDialog;
         currentLine = 0;
         uiManager.ShowDialogUI();
-        ShowLine();
+        dialogUIGroup.SetActive(false);
+        nextButton.interactable = false;
+
+        StartCoroutine(ShowLineWithBackgroundDelay());
     }
 
     public void OnClickNext()
     {
-        Debug.Log("클릭되었음");
         currentLine++;
         if (currentLine >= currentDialog.dialogLines.Length)
         {
@@ -41,24 +41,38 @@ public class DialogManager : MonoBehaviour
         }
         else
         {
-            ShowLine();
+            dialogUIGroup.SetActive(false);
+            nextButton.interactable = false;
+            StartCoroutine(ShowLineWithBackgroundDelay());
         }
     }
 
-    private void ShowLine()
+    private IEnumerator ShowLineWithBackgroundDelay()
     {
-        characterImage.sprite = currentDialog.characterSprite;
-        dialogText.text = currentDialog.dialogLines[currentLine];
+        dialogText.text = "";
+        if (currentLine % 2 == 0)
+        {
+            int imgIndex = currentLine / 2;
 
-        Debug.Log(dialogText.text);
+            if (imgIndex < currentDialog.backgroundImages.Length)
+                backgroundImage.sprite = currentDialog.backgroundImages[imgIndex];
+
+            yield return new WaitForSeconds(2f);
+
+            if (imgIndex < currentDialog.characterImages.Length)
+                characterImage.sprite = currentDialog.characterImages[imgIndex];
+        }
+
+        dialogText.text = currentDialog.dialogLines[currentLine];
+        dialogUIGroup.SetActive(true);
+
+        nextButton.interactable = true;
+        Debug.Log($"{currentLine + 1}번째 대사: {dialogText.text}");
     }
+
 
     private void EndDialog()
     {
-        //다이얼로그가 끝나면
-        //uiManager.ShowInGameUI();
-
-
         uiManager.ShowTutorialUI();
     }
 
@@ -71,5 +85,4 @@ public class DialogManager : MonoBehaviour
     {
         nextButton.onClick.RemoveListener(OnClickNext);
     }
-
 }
