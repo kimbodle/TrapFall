@@ -108,7 +108,15 @@ MonoBehaviour:
   recoveryTileTime: 1
   tileManager: {fileID: 0}
   breakAnimation: {fileID: 0}
+  isOuterWall: 0
+  nodePosition: {x: 0, y: 0}
   currentTileType: 0
+  framesBreakTile:
+  - {fileID: 575416411989098254, guid: 1c752006d0690a14ea1756b08c093294, type: 3}
+  - {fileID: -2163285953626813001, guid: 1c752006d0690a14ea1756b08c093294, type: 3}
+  - {fileID: 4314385034316514726, guid: 1c752006d0690a14ea1756b08c093294, type: 3}
+  - {fileID: -905189458624576061, guid: 1c752006d0690a14ea1756b08c093294, type: 3}
+  frameInterval: 0.1
 --- !u!212 &5158120288886646027
 SpriteRenderer:
   m_ObjectHideFlags: 0

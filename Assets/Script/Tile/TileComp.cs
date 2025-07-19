@@ -19,7 +19,10 @@ public class TileComp : MonoBehaviour
     [SerializeField]
     TileType currentTileType = TileType.Normal;
     SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite[] framesBreakTile;
+    [SerializeField] private float frameInterval = 0.2f; // 프레임 간 간격 (초)
 
+    private bool bIsBreak = false;
 
     private void Awake()
     {
@@ -97,12 +100,37 @@ public class TileComp : MonoBehaviour
         yield return new WaitForSeconds(1f);
         //타일 부셔지는 애니메이션 ㄱㄱ
         SoundManager.Instance.PlaySFX(SFXType.TileDestroy);
-        SetTileType(TileType.Destroyed);
+        //SetTileType(TileType.Destroyed);
         //Debug.Log(breakAnimation.Play("Broken") ? "True" : "False");
         //animator.SetTrigger("Play");
+        StartBreakAnimation();
 
         yield return new WaitForSeconds(recoveryTileTime);
         SetTileType(TileType.Normal);
+    }
+    public void StartBreakAnimation()
+    {
+        if (!bIsBreak)
+        {
+            StopCoroutine(BreakAnimationRoutine());
+            StartCoroutine(BreakAnimationRoutine());
+        }
+    }
+
+    private IEnumerator BreakAnimationRoutine()
+    {
+        bIsBreak = true;
+
+        for (int i = 0; i < framesBreakTile.Length; i++)
+        {
+            spriteRenderer.sprite = framesBreakTile[i];
+            yield return new WaitForSeconds(frameInterval);
+        }
+
+        bIsBreak = false;
+
+        // 예: 부서진 후 사라지게 하거나 복구
+        SetTileType(TileType.Destroyed); // 또는 spriteRenderer.sprite = null;
     }
     private void TileEvent()
     {
