@@ -29,7 +29,7 @@ public class TileManager : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                GameObject tileObj = Instantiate(tilePrefab, new Vector3(x + spawnTilePoint.x, y + spawnTilePoint.y, 0), Quaternion.identity, this.transform);
+                GameObject tileObj = Instantiate(tilePrefab, new Vector3(x + spawnTilePoint.x, y + spawnTilePoint.y, y), Quaternion.identity, this.transform);
                 TileComp tileComp = tileObj.GetComponent<TileComp>();
                 tileComp.tileManager = this;
                 tiles[x, y] = tileComp;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -38,7 +39,7 @@ public class SoundManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
+        SetupAudioSources();
         BGMDict[BGMType.Tutorial] = bgmTutorial;
         BGMDict[BGMType.Game] = bgmGame;
 
@@ -51,6 +52,29 @@ public class SoundManager : MonoBehaviour
         sfxDict[SFXType.NextRound] = sfxNextRound;
         sfxDict[SFXType.BestScore] = sfxBestScore;
     }
+
+    private void SetupAudioSources()
+    {
+        if (bgmSource == null)
+        {
+            GameObject bgmObj = new GameObject("BGM_Source");
+            bgmObj.transform.SetParent(this.transform);
+            bgmSource = bgmObj.AddComponent<AudioSource>();
+            bgmSource.loop = true;
+            bgmSource.playOnAwake = false;
+            bgmSource.volume = 0.5f;
+        }
+
+        if (sfxSource == null)
+        {
+            GameObject sfxObj = new GameObject("SFX_Source");
+            sfxObj.transform.SetParent(this.transform);
+            sfxSource = sfxObj.AddComponent<AudioSource>();
+            sfxSource.playOnAwake = false;
+            sfxSource.volume = 1.0f;
+        }
+    }
+
     public void PlaySFX(SFXType key)
     {
         if (sfxDict.TryGetValue(key, out var clip))

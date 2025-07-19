@@ -68,11 +68,11 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1, y: 1.4375}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -93,14 +93,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileSprite:
-  - {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  - {fileID: -712631045867808456, guid: b670ab75dde984907b8570040daa08c5, type: 3}
-  - {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
-  - {fileID: 21300000, guid: daf2ab606d4db0d4f9ecf4c02137d2a8, type: 3}
-  - {fileID: 21300000, guid: 8063050a249eef441beb8cbbd04c086c, type: 3}
-  - {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  - {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  - {fileID: 7482667652216324306, guid: 0ae1e1b3611550840908cb84ff62cede, type: 3}
+  - {fileID: -9036441625435774272, guid: 58ed2dc5d37f8ed448b9d3726af7601a, type: 3}
+  - {fileID: 3921785315569368718, guid: 9a234dd879510104e9c7b5c7ba941fbb, type: 3}
+  - {fileID: 4775922646163101076, guid: b770186b523cd3c4ca129305f231adb3, type: 3}
+  - {fileID: 8336777766864769597, guid: 70b8d20a0243fc84eb36c7bb01093ae7, type: 3}
+  - {fileID: -3512205603924625933, guid: 908a6041f5e1b274e85c3c05fc20228b, type: 3}
+  - {fileID: -8821023650261259164, guid: 9950cfd1a270b124aae1aa9422dbe019, type: 3}
+  - {fileID: 2111863098776054670, guid: 10250860ac0e9aa4fb52efce4d7dad6c, type: 3}
+  - {fileID: 2148066512625033837, guid: 90c7d51eff1e64542b71e873df913ef1, type: 3}
   - {fileID: 7482667652216324306, guid: 0ae1e1b3611550840908cb84ff62cede, type: 3}
   - {fileID: 7482667652216324306, guid: 0ae1e1b3611550840908cb84ff62cede, type: 3}
   randomTileTime: 5
@@ -150,8 +150,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -9036441625435774272, guid: 58ed2dc5d37f8ed448b9d3726af7601a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
