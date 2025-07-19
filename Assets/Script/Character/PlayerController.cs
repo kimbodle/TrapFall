@@ -79,7 +79,26 @@ public class PlayerController : MonoBehaviour
             soundManager.StopWalkingLoop();
         }
     }
+    public void KnockbackTo(Vector3 targetPos)
+    {
+        StartCoroutine(KnockbackRoutine(targetPos));
+    }
 
+    private IEnumerator KnockbackRoutine(Vector3 targetPos)
+    {
+        float duration = 0.3f;
+        Vector3 start = transform.position;
+        float time = 0f;
+
+        while (time < duration)
+        {
+            transform.position = Vector3.Lerp(start, targetPos, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = targetPos;
+    }
     private void PlayerInput()
     {
         movement = playerControls.Player.Move.ReadValue<Vector2>();

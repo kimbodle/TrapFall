@@ -92,4 +92,12 @@ public class TileManager : MonoBehaviour
             }
         }
     }
+
+    public Vector3 GetLastTilePositionInDirection(Vector3 start, Vector3 dir)
+    {
+        RaycastHit2D[] hits = Physics2D.RaycastAll(start, dir, 100f, LayerMask.GetMask("Tile"));
+        if (hits.Length == 0) return start;
+
+        return hits[hits.Length - 1].point;
+    }
 }

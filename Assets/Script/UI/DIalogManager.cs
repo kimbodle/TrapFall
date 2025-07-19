@@ -15,6 +15,11 @@ public class DialogManager : MonoBehaviour
     private DialogData currentDialog;
     private int currentLine = 0;
 
+    private void Start()
+    {
+        StartDialog(tutorialDialog);
+    }
+
     public void StartDialog(DialogData data)
     {
         currentDialog = data;
@@ -25,6 +30,7 @@ public class DialogManager : MonoBehaviour
 
     public void OnClickNext()
     {
+        Debug.Log("클릭되었음");
         currentLine++;
         if (currentLine >= currentDialog.dialogLines.Length)
         {
@@ -46,6 +52,9 @@ public class DialogManager : MonoBehaviour
     {
         //다이얼로그가 끝나면
         //uiManager.ShowInGameUI();
+
+
+        uiManager.ShowTutorialUI();
     }
 
     private void OnEnable()
