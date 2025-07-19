@@ -94,7 +94,7 @@ public class TileComp : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         //타일 부셔지는 애니메이션 ㄱㄱ
-        //SoundManager.Instance.PlaySFX(SFXType.TileDestroy); 현재 부서지는 소리가 너무커서 soundClip 제거했더니 경고표시뜸
+        SoundManager.Instance.PlaySFX(SFXType.TileDestroy);
         SetTileType(TileType.Destroyed);
         //Debug.Log(breakAnimation.Play("Broken") ? "True" : "False");
         //animator.SetTrigger("Play");

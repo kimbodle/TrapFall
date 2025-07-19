@@ -13,6 +13,7 @@ public class SoundManager : MonoBehaviour
     [Header("Audio Sources")]
     [SerializeField] private AudioSource bgmSource;
     [SerializeField] private AudioSource sfxSource;
+    private AudioSource walkLoopSource;
 
     [Header("Audio Clips, BGM")]
     public AudioClip bgmMainMenu;
@@ -110,8 +111,33 @@ public class SoundManager : MonoBehaviour
 
         bgmSource.volume = defaultBGMVolume;
         sfxSource.volume = defaultSFXVolume;
+
+        walkLoopSource = gameObject.AddComponent<AudioSource>();
+        walkLoopSource.playOnAwake = false;
+        walkLoopSource.loop = true;
+        walkLoopSource.volume = defaultSFXVolume * 0.7f;
+        walkLoopSource.clip = sfxWalk;
+    }
+    public void PlayWalkingLoop()
+    {
+        if (walkLoopSource != null && !walkLoopSource.isPlaying)
+        {
+            walkLoopSource.Play();
+        }
     }
 
+    public void StopWalkingLoop()
+    {
+        if (walkLoopSource != null && walkLoopSource.isPlaying)
+        {
+            walkLoopSource.Stop();
+        }
+    }
+
+    public bool IsWalkingSoundPlaying()
+    {
+        return walkLoopSource != null && walkLoopSource.isPlaying;
+    }
 
     public void PlaySFX(SFXType key)
     {
@@ -135,11 +161,11 @@ public class SoundManager : MonoBehaviour
         if (sfxDict.TryGetValue(key, out var clip))
         {
             bool isPlaying = source.isPlaying && source.clip == clip;
-            Debug.Log($"▶️ 체크: {key}, isPlaying={source.isPlaying}, clipMatch={(source.clip == clip)}");
+            Debug.Log($"▶️ 체크: {key.ToString()}, isPlaying={source.isPlaying}, clipMatch={(source.clip == clip)}");
             return isPlaying;
         }
 
-        Debug.LogWarning($"❌ SFXType {key} 없음!");
+        Debug.LogWarning($"❌ SFXType {key.ToString()} 없음!");
         return false;
     }
 
@@ -171,6 +197,9 @@ public class SoundManager : MonoBehaviour
     {
         if (sfxSource == null) { return; }
         sfxSource.volume = Mathf.Clamp01(volume);
+
+        if (walkLoopSource == null) { return; }
+        walkLoopSource.volume = Mathf.Clamp01(volume);
     }
     public float GetBGMVolume() => bgmSource.volume;
     public float GetSFXVolume() => sfxSource.volume;

@@ -183,7 +183,7 @@ public class GameManager : MonoBehaviour
         // UI, 재시작 등 호출
         //그거 검정 페이드인 카메라 연출
         //게임 오버 UI출력
-
+        FindAnyObjectByType<PlayerController>().BlockInput(true);
         SoundManager.Instance.StopBGM();
         SoundManager.Instance.PlaySFX(SFXType.GameOver);
         EndRound() ;

@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 lastMoveDir = Vector2.down;
     public bool bIsJump = false;
+    private bool isInputBlocked = false;
 
     private void Awake()
     {
@@ -49,12 +50,34 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (isInputBlocked)
+        {
+            movement = Vector2.zero;
+            return;
+        }
         PlayerInput();
     }
 
+    public void BlockInput(bool block)
+    {
+        isInputBlocked = block;
+    }
     private void FixedUpdate()
     {
         move();
+        bool isMoving = movement.sqrMagnitude > 0.01f;
+
+        if (isMoving)
+        {
+            if (!soundManager.IsWalkingSoundPlaying())
+            {
+                soundManager.PlayWalkingLoop();
+            }
+        }
+        else
+        {
+            soundManager.StopWalkingLoop();
+        }
     }
 
     private void PlayerInput()
@@ -92,16 +115,6 @@ public class PlayerController : MonoBehaviour
     private void move()
     {
         rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
-
-        if (!soundManager.IsPlayingClip(soundManager.GetsfxSource(), SFXType.Walk))
-        {
-            Debug.Log("🔊 걷기 사운드 재생 시작!");
-            soundManager.PlaySFX(SFXType.Walk);
-        }
-        else
-        {
-            Debug.Log("🔁 걷기 사운드 이미 재생 중");
-        }
     }
 
     IEnumerator TemporaryCollisionIgnore()
