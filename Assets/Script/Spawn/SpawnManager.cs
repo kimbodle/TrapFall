@@ -49,7 +49,7 @@ public class SpawnManager : MonoBehaviour
         if (normalTiles.Count == 0) return;
 
         TileComp tile = normalTiles[Random.Range(0, normalTiles.Count)];
-        Vector3 spawnPos = tile.transform.position;
+        Vector3 spawnPos = tile.transform.position + new Vector3(0,0.5f,0);
 
         GameObject item = poolDict[itemType].Dequeue();
         item.transform.position = spawnPos;

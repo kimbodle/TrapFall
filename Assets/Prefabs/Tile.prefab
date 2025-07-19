@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1964407189538789666}
   - component: {fileID: 5546284672970153479}
   - component: {fileID: 5158120288886646027}
+  - component: {fileID: -3789481614291603396}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Tile
@@ -101,11 +102,12 @@ MonoBehaviour:
   - {fileID: -8821023650261259164, guid: 9950cfd1a270b124aae1aa9422dbe019, type: 3}
   - {fileID: 2111863098776054670, guid: 10250860ac0e9aa4fb52efce4d7dad6c, type: 3}
   - {fileID: 2148066512625033837, guid: 90c7d51eff1e64542b71e873df913ef1, type: 3}
-  - {fileID: 7482667652216324306, guid: 0ae1e1b3611550840908cb84ff62cede, type: 3}
+  - {fileID: -905189458624576061, guid: 1c752006d0690a14ea1756b08c093294, type: 3}
   - {fileID: 7482667652216324306, guid: 0ae1e1b3611550840908cb84ff62cede, type: 3}
   randomTileTime: 5
   recoveryTileTime: 1
   tileManager: {fileID: 0}
+  breakAnimation: {fileID: 0}
   currentTileType: 0
 --- !u!212 &5158120288886646027
 SpriteRenderer:
@@ -162,3 +164,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &-3789481614291603396
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4524081116972622518}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: e5d61cc8d6483a34cbd58b6823ccb1ae, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: e5d61cc8d6483a34cbd58b6823ccb1ae, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0

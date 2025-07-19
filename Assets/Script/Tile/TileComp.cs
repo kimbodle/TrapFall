@@ -12,6 +12,7 @@ public class TileComp : MonoBehaviour
     public float randomTileTime= 5.0f;
     public float recoveryTileTime = 3.0f;
     public TileManager tileManager;
+    public Animation breakAnimation;
 
     Vector2 worldPosition;
     [SerializeField]
@@ -21,6 +22,7 @@ public class TileComp : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        breakAnimation = GetComponent<Animation>();
     }
 
     //밟았다고 치고
@@ -80,6 +82,7 @@ public class TileComp : MonoBehaviour
 
     private void updateTileImage()
     {
+        //if(currentTileType == TileType.Destroyed) return;
         int tileIndex = (int)currentTileType;
         if (!spriteRenderer || tileSprite.Length <= tileIndex || tileSprite[tileIndex] == null) return;
 
@@ -93,6 +96,8 @@ public class TileComp : MonoBehaviour
         //타일 부셔지는 애니메이션 ㄱㄱ
         //SoundManager.Instance.PlaySFX(SFXType.TileDestroy); 현재 부서지는 소리가 너무커서 soundClip 제거했더니 경고표시뜸
         SetTileType(TileType.Destroyed);
+        //Debug.Log(breakAnimation.Play("Broken") ? "True" : "False");
+        //animator.SetTrigger("Play");
 
         yield return new WaitForSeconds(recoveryTileTime);
         SetTileType(TileType.Normal);
