@@ -12,7 +12,6 @@ public class TileComp : MonoBehaviour
     public float randomTileTime= 5.0f;
     public float recoveryTileTime = 3.0f;
     public TileManager tileManager;
-    Animator animator;
 
     Vector2 worldPosition;
     [SerializeField]
@@ -22,7 +21,6 @@ public class TileComp : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
     }
 
     //밟았다고 치고
@@ -93,17 +91,10 @@ public class TileComp : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         //타일 부셔지는 애니메이션 ㄱㄱ
-        animator.
         //SoundManager.Instance.PlaySFX(SFXType.TileDestroy); 현재 부서지는 소리가 너무커서 soundClip 제거했더니 경고표시뜸
         SetTileType(TileType.Destroyed);
 
         yield return new WaitForSeconds(recoveryTileTime);
-        SetTileType(TileType.Normal);
-    }
-    public IEnumerator RevertTile(float time = 0.0f)
-    {
-        yield return new WaitForSeconds(time);
-
         SetTileType(TileType.Normal);
     }
     private void TileEvent()

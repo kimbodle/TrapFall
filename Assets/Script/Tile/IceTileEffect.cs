@@ -4,12 +4,7 @@ using UnityEngine;
 public class IceTileEffect : MonoBehaviour, ISpecialTile
 {
     private bool triggered = false;
-    private TileComp tile;
 
-    private void Awake()
-    {
-        tile = GetComponent<TileComp>();
-    }
     public void Activate(GameObject player)
     {
         if (!triggered)
@@ -22,7 +17,15 @@ public class IceTileEffect : MonoBehaviour, ISpecialTile
                 //multi,time
                 controller.ModifySpeed(0.5f, 3f);
         }
-        StartCoroutine(tile.RevertTile());
+        StartCoroutine(RevertTile());
+    }
+    private IEnumerator RevertTile()
+    {
+        yield return new WaitForSeconds(1f);
+
+        TileComp tile = GetComponent<TileComp>();
+        if (tile != null)
+            tile.SetTileType(TileType.Normal); // 타일 복구
     }
     public void ResetTile()
     {

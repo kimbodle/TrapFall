@@ -4,12 +4,6 @@ using UnityEngine;
 public class SpinTileEffect : MonoBehaviour, ISpecialTile
 {
     private bool triggered = false;
-    private TileComp tile;
-
-    private void Awake()
-    {
-        tile = GetComponent<TileComp>();
-    }
 
     public void Activate(GameObject player)
     {
@@ -22,7 +16,16 @@ public class SpinTileEffect : MonoBehaviour, ISpecialTile
         if (controller != null)
             controller.InvertInput(2f); // 2초간 좌우 반전
 
-        StartCoroutine(tile.RevertTile());
+        StartCoroutine(RevertTile());
+    }
+
+    private IEnumerator RevertTile()
+    {
+        yield return new WaitForSeconds(1f);
+
+        TileComp tile = GetComponent<TileComp>();
+        if (tile != null)
+            tile.SetTileType(TileType.Normal);
     }
 
     public void ResetTile()
