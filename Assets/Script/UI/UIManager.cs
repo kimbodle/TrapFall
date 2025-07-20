@@ -62,7 +62,7 @@ public class UIManager : MonoBehaviour
             gradeText.text = $"{rank}등";
 
         if (NickNameText != null)
-            NickNameText.text = $"{nickname}님의 점수:";
+            NickNameText.text = $"{nickname}님의\n점수:";
         if (gameOverScoreText != null)
             gameOverScoreText.text = $"{score} 점";
     }
