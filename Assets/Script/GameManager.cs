@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     //Todo: 사운드를 위해 InGameScene -> MainMenu로 옮겨야함(추후 점수데이터와 유저 정보에도 필요)
     public static GameManager Instance { get; private set; }
 
+    public bool IsGameStarted { get; private set; } = false;
+
     public TileManager tileManager;
     public RoundCsvLoader roundCsvLoader;
     public UIManager uiManager;
@@ -54,7 +56,7 @@ public class GameManager : MonoBehaviour
     {
         InitRounds();
         //게임 시작 함수
-        if (PlayerPrefs.HasKey("HaveStory") && PlayerPrefs.GetInt("HaveStory") == 1)
+        if (PlayerPrefs.HasKey("HaveStory") && PlayerPrefs.GetInt("HaveStory") == 0)
         {
             Debug.Log("스토리 봄");
             GameStart();
@@ -69,6 +71,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if(!IsGameStarted) { return; }
         currentTime += Time.deltaTime;
         uiManager.UpdateTime(currentTime);
     }
@@ -99,12 +102,13 @@ public class GameManager : MonoBehaviour
         
         SoundManager.Instance.PlayBGM(BGMType.Game);
         uiManager.ShowInGameUI();
+        IsGameStarted = true;
         StartCoroutine(RoundLoop());
         StartCoroutine(CheckTime());
     }
     IEnumerator CheckTime()
     {
-        while (true)
+        while (IsGameStarted)
         {
             yield return new WaitForSeconds(1f);
             SetScore(1);
@@ -166,6 +170,7 @@ public class GameManager : MonoBehaviour
 
     void EndRound()
     {
+        IsGameStarted = false;
         foreach (var co in activeSpawnCoroutines)
             StopCoroutine(co);
 
@@ -202,7 +207,7 @@ public class GameManager : MonoBehaviour
         if (isGameOver) return;
         isGameOver = true;
 
-        Debug.Log("💀 Game Over!");
+        Debug.Log("Game Over!");
         // UI, 재시작 등 호출
         //그거 검정 페이드인 카메라 연출
         //게임 오버 UI출력

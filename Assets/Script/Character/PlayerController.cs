@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviour
     }
     private void PlayerInput()
     {
+        if(!GameManager.Instance.IsGameStarted) { return; }
         movement = playerControls.Player.Move.ReadValue<Vector2>();
         if (isInverted)
         {
