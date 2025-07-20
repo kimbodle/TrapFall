@@ -136,7 +136,7 @@ public class RankingManager : MonoBehaviour
         foreach (Transform child in rankContentParent)
             Destroy(child.gameObject);
 
-        int displayCount = Mathf.Min(10, sortedList.Count);
+        int displayCount = Mathf.Min(100, sortedList.Count);
         int currentRank = 1;
         int realRank = 1;
         int? lastScore = null;
