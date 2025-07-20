@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum BGMType { MainMenu, Tutorial, Game }
-public enum SFXType { Jump, Walk, TileDestroy, RelicGet, GameOver, NextRound, BestScore }
+public enum SFXType { Jump, Walk, TileDestroy, RelicGet, GameOver, NextRound, BestScore, RockCrush }
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
@@ -28,6 +28,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip sfxNextRound;
     public AudioClip sfxGameOver;
     public AudioClip sfxBestScore;
+    public AudioClip sfxRockCrush;
 
     [SerializeField][Range(0f, 1f)] private float defaultBGMVolume = 0.5f;
     [SerializeField][Range(0f, 1f)] private float defaultSFXVolume = 1f;
@@ -58,6 +59,7 @@ public class SoundManager : MonoBehaviour
         sfxDict[SFXType.GameOver] = sfxGameOver;
         sfxDict[SFXType.NextRound] = sfxNextRound;
         sfxDict[SFXType.BestScore] = sfxBestScore;
+        sfxDict[SFXType.RockCrush] = sfxRockCrush;
     }
     private void OnEnable()
     {

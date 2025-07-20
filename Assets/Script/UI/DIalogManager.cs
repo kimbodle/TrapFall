@@ -40,6 +40,7 @@ public class DialogManager : MonoBehaviour
         currentLine++;
         if (currentLine == 2 || currentLine == 3) {
             warningImageShaker.Shake(15f, 0.5f);
+            SoundManager.Instance.PlaySFX(SFXType.RockCrush);
         }
         if (currentLine >= currentDialog.dialogLines.Length)
         {
