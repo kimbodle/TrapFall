@@ -1,5 +1,7 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public interface ITimeEvent
 {
@@ -30,7 +32,7 @@ public class TileComp : MonoBehaviour
         Vector2 center = transform.position;
         Vector2 size = new Vector2(0.9f, 0.9f); // 타일 크기에 맞게
 
-        Collider2D player = Physics2D.OverlapBox(center, size, 0f, playerLayer);
+        Collider2D player = Physics2D.OverlapBox(center + new Vector2(0, 0.2f), size, 0f, playerLayer);
 
         return player != null;
     }
@@ -88,7 +90,9 @@ public class TileComp : MonoBehaviour
         {
             Debug.Log("타일이 변한 후 위에 플레이어가 있어 효과 즉시 발동!");
 
-            var player = Physics2D.OverlapBox(transform.position, new Vector2(0.9f, 0.9f), 0f, playerLayer);
+            var player = Physics2D.OverlapBox(transform.position + new Vector3(0, 0.2f, 0), new Vector2(0.9f, 0.9f), 0f, playerLayer);
+            DrawBox2D(transform.position + new Vector3(0, 0.2f, 0), new Vector2(0.9f, 0.9f), 0f, Color.red);
+
             if (player != null)
             {
                 if (!IsWalkable())
@@ -106,6 +110,26 @@ public class TileComp : MonoBehaviour
         }
         //if (currentTileType == TileType.Danger) StartCoroutine(DestroyTile());
     }
+    void DrawBox2D(Vector2 center, Vector2 size, float angle, Color color)
+    {
+        Vector2 halfSize = size * 0.5f;
+
+        // 회전
+        Quaternion rot = Quaternion.Euler(0f, 0f, angle);
+
+        // 꼭짓점 계산 (모두 Vector2로 유지)
+        Vector2 topLeft = center + (Vector2)(rot * new Vector3(-halfSize.x, halfSize.y));
+        Vector2 topRight = center + (Vector2)(rot * new Vector3(halfSize.x, halfSize.y));
+        Vector2 bottomRight = center + (Vector2)(rot * new Vector3(halfSize.x, -halfSize.y));
+        Vector2 bottomLeft = center + (Vector2)(rot * new Vector3(-halfSize.x, -halfSize.y));
+
+        // 라인 그리기
+        Debug.DrawLine(topLeft, topRight, color, 30f);
+        Debug.DrawLine(topRight, bottomRight, color, 30f);
+        Debug.DrawLine(bottomRight, bottomLeft, color, 30f);
+        Debug.DrawLine(bottomLeft, topLeft, color, 30f);
+    }
+
     private bool IsSpecialTile(TileType type)
     {
         return type == TileType.Danger ||
@@ -213,7 +237,7 @@ public class TileComp : MonoBehaviour
     {
         Vector2 tileCenter = transform.position;
         Vector2 checkSize = new Vector2(0.9f, 0.9f); // 타일 크기에 맞춰 조정
-        Collider2D hit = Physics2D.OverlapBox(tileCenter + Vector2.up * 0.1f, checkSize, 0f);
+        Collider2D hit = Physics2D.OverlapBox(tileCenter + new Vector2(0, 0.2f) , checkSize, 0f);
 
         return hit != null;
     }
