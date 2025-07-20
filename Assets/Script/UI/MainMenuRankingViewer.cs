@@ -61,7 +61,7 @@ public class MainMenuRankingViewer : MonoBehaviour
         int realRank = 1;
         int? lastScore = null;
 
-        for (int i = 0; i < Mathf.Min(10, sortedList.Count); i++)
+        for (int i = 0; i < Mathf.Min(50, sortedList.Count); i++)
         {
             var data = sortedList[i];
 

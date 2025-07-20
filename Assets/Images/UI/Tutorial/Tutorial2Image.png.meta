@@ -1,34 +1,34 @@
 fileFormatVersion: 2
-guid: 0581ebc1758430c4bb2ad3f984a277f6
+guid: 4d0d8d838feac444c9cfd109129c8eb6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4357385755198364658
-    second: Group 150_0
+      213: 4517269943150851737
+    second: Group 152 (1)_0
   - first:
-      213: -6841929730220189608
-    second: Group 150_1
+      213: 7447599358239765263
+    second: Group 152 (1)_1
   - first:
-      213: -4571149352312959711
-    second: Group 150_2
+      213: -7462644043982459757
+    second: Group 152 (1)_2
   - first:
-      213: -7912467506407550925
-    second: Group 150_3
+      213: 5810880278936470341
+    second: Group 152 (1)_3
   - first:
-      213: -5499511776546837282
-    second: Group 150_4
+      213: -136853385530275457
+    second: Group 152 (1)_4
   - first:
-      213: -3209528601477466154
-    second: Group 150_5
+      213: -611266656076636967
+    second: Group 152 (1)_5
   - first:
-      213: -8869413064814832867
-    second: Group 150_6
+      213: 3889194282115024375
+    second: Group 152 (1)_6
   - first:
-      213: -740494109284715905
-    second: Group 150_7
+      213: -5484885370210151673
+    second: Group 152 (1)_7
   - first:
-      213: 5372682846006579233
-    second: Group 150_8
+      213: 8028070578516196324
+    second: Group 152 (1)_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -75,7 +75,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -120,11 +120,37 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Group 150_0
+      name: Group 152 (1)_0
       rect:
         serializedVersion: 2
         x: 24
@@ -139,14 +165,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e04ed08fdb47783c0800000000000000
-      internalID: -4357385755198364658
+      spriteID: 9963e0c641190be30800000000000000
+      internalID: 4517269943150851737
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Group 150_1
+      name: Group 152 (1)_1
       rect:
         serializedVersion: 2
         x: 81
@@ -161,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8589a0419259c01a0800000000000000
-      internalID: -6841929730220189608
+      spriteID: f03fe4148203b5760800000000000000
+      internalID: 7447599358239765263
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Group 150_2
+      name: Group 152 (1)_2
       rect:
         serializedVersion: 2
         x: 144
@@ -183,14 +209,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 12d012012e30090c0800000000000000
-      internalID: -4571149352312959711
+      spriteID: 39cad31e7cc5f6890800000000000000
+      internalID: -7462644043982459757
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Group 150_3
+      name: Group 152 (1)_3
       rect:
         serializedVersion: 2
         x: 187
@@ -205,14 +231,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 330d1c799b4413290800000000000000
-      internalID: -7912467506407550925
+      spriteID: 543c45a83d464a050800000000000000
+      internalID: 5810880278936470341
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Group 150_4
+      name: Group 152 (1)_4
       rect:
         serializedVersion: 2
         x: 207
@@ -227,14 +253,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: edc29d84d2fcda3b0800000000000000
-      internalID: -5499511776546837282
+      spriteID: f798829229cc91ef0800000000000000
+      internalID: -136853385530275457
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Group 150_5
+      name: Group 152 (1)_5
       rect:
         serializedVersion: 2
         x: 295
@@ -249,14 +275,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6d7ba74edb67573d0800000000000000
-      internalID: -3209528601477466154
+      spriteID: 9dcd28507385487f0800000000000000
+      internalID: -611266656076636967
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Group 150_6
+      name: Group 152 (1)_6
       rect:
         serializedVersion: 2
         x: 19
@@ -271,14 +297,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d13d0894fc389e480800000000000000
-      internalID: -8869413064814832867
+      spriteID: 7f542fff79139f530800000000000000
+      internalID: 3889194282115024375
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Group 150_7
+      name: Group 152 (1)_7
       rect:
         serializedVersion: 2
         x: 212
@@ -293,14 +319,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f72b0d9e78c39b5f0800000000000000
-      internalID: -740494109284715905
+      spriteID: 70313e2e0d5c1e3b0800000000000000
+      internalID: -5484885370210151673
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Group 150_8
+      name: Group 152 (1)_8
       rect:
         serializedVersion: 2
         x: 0
@@ -315,8 +341,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1209e0f259a9f8a40800000000000000
-      internalID: 5372682846006579233
+      spriteID: 4ebf83818af696f60800000000000000
+      internalID: 8028070578516196324
       vertices: []
       indices: 
       edges: []
@@ -335,15 +361,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Group 150_0: -4357385755198364658
-      Group 150_1: -6841929730220189608
-      Group 150_2: -4571149352312959711
-      Group 150_3: -7912467506407550925
-      Group 150_4: -5499511776546837282
-      Group 150_5: -3209528601477466154
-      Group 150_6: -8869413064814832867
-      Group 150_7: -740494109284715905
-      Group 150_8: 5372682846006579233
+      Group 152 (1)_0: 4517269943150851737
+      Group 152 (1)_1: 7447599358239765263
+      Group 152 (1)_2: -7462644043982459757
+      Group 152 (1)_3: 5810880278936470341
+      Group 152 (1)_4: -136853385530275457
+      Group 152 (1)_5: -611266656076636967
+      Group 152 (1)_6: 3889194282115024375
+      Group 152 (1)_7: -5484885370210151673
+      Group 152 (1)_8: 8028070578516196324
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
