@@ -2252,6 +2252,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: c602bc751b355f046b785345d8c7ec92, type: 3}
     - target: {fileID: 8490245625597789430, guid: 3c47716852345e2428aa8d5a1dd98989, type: 3}
+      propertyPath: bgmTutorial
+      value: 
+      objectReference: {fileID: 8300000, guid: ee734d21c7ee99a46887061c2f5c1a4e, type: 3}
+    - target: {fileID: 8490245625597789430, guid: 3c47716852345e2428aa8d5a1dd98989, type: 3}
       propertyPath: sfxTileDestroy
       value: 
       objectReference: {fileID: 8300000, guid: fabfa0d08c1134f4b896bdef8ec45e53, type: 3}

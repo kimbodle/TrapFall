@@ -5,6 +5,8 @@ using System.Collections;
 
 public class DialogManager : MonoBehaviour
 {
+    public Camera virtualCamera;
+
     [Header("UI Elements")]
     [SerializeField] private UIManager uiManager;
     [SerializeField] private Image characterImage;
@@ -16,6 +18,7 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private DialogData tutorialDialog;
 
     [SerializeField] private GameObject dialogUIGroup;
+    [SerializeField] private ImageShaker warningImageShaker;
 
     private DialogData currentDialog;
     private int currentLine = 0;
@@ -35,6 +38,9 @@ public class DialogManager : MonoBehaviour
     public void OnClickNext()
     {
         currentLine++;
+        if (currentLine == 2 || currentLine == 3) {
+            warningImageShaker.Shake(15f, 0.5f);
+        }
         if (currentLine >= currentDialog.dialogLines.Length)
         {
             EndDialog();

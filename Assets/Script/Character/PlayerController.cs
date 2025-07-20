@@ -163,25 +163,29 @@ public class PlayerController : MonoBehaviour
     {
         float now = Time.time;
 
+        slowEndTime = Mathf.Max(slowEndTime, now + duration);
         if (!isSlowed)
         {
             isSlowed = true;
             originalSpeed = moveSpeed;
             moveSpeed *= multiplier;
+
             StartCoroutine(SlowWatcher());
         }
-
-        slowEndTime = now + duration;
     }
 
     private IEnumerator SlowWatcher()
     {
         while (Time.time < slowEndTime)
+        {
             yield return null;
+        }
 
+        // 느려진 시간이 끝나면 복원
         moveSpeed = originalSpeed;
         isSlowed = false;
     }
+
 
     public void InvertInput(float duration = 2f)
     {

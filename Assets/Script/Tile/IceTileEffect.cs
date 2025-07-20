@@ -20,14 +20,24 @@ public class IceTileEffect : MonoBehaviour, ISpecialTile
 
             var controller = player.GetComponent<PlayerController>();
             if (controller != null)
-                //multi,time
-                controller.ModifySpeed(0.5f, 3f);
+            {
+                controller.ModifySpeed(0.5f, 3f); // 감속 배율, 지속시간
+            }
+
+            StartCoroutine(ResetAfterDuration(3f)); // 3초 후 다시 사용 가능
+            StartCoroutine(tile.RevertTile());      // 타일 상태도 복구
         }
-        StartCoroutine(tile.RevertTile());
     }
+
+    private IEnumerator ResetAfterDuration(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        triggered = false;
+    }
+
     public void ResetTile()
     {
         triggered = false;
-        StopAllCoroutines();
+        StopCoroutine(nameof(ResetAfterDuration));
     }
 }
