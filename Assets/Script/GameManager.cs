@@ -21,7 +21,9 @@ public class GameManager : MonoBehaviour
     //Todo: 사운드를 위해 InGameScene -> MainMenu로 옮겨야함(추후 점수데이터와 유저 정보에도 필요)
     public static GameManager Instance { get; private set; }
 
-    public bool IsGameStarted { get; private set; } = false;
+    public bool IsGameStarted { get; private set; } = false;   // 게임 전체 시작 여부
+    public bool IsRoundActive { get; private set; } = false;   // 라운드 진행 중 여부
+
 
     public TileManager tileManager;
     public RoundCsvLoader roundCsvLoader;
@@ -38,6 +40,8 @@ public class GameManager : MonoBehaviour
     int currentRound = 0;
     int currentScore = 0;
     float currentTime = 0;
+
+
 
     private void Awake()
     {
@@ -56,7 +60,7 @@ public class GameManager : MonoBehaviour
     {
         InitRounds();
         //게임 시작 함수
-        if (PlayerPrefs.HasKey("HaveStory") && PlayerPrefs.GetInt("HaveStory") == 0)
+        if (PlayerPrefs.HasKey("HaveStory") && PlayerPrefs.GetInt("HaveStory") == 1)
         {
             Debug.Log("스토리 봄");
             GameStart();
@@ -122,21 +126,23 @@ public class GameManager : MonoBehaviour
         {
             currentRound++;
             currentRound = math.min(currentRound, 15);
-
             uiManager.UpdateRound(currentRound);
             Debug.Log($"[Round {currentRound}] 시작");
 
             RoundData roundData = rounds.FirstOrDefault(r => r.round == currentRound);
             if (roundData != null)
             {
+                IsRoundActive = true;
                 SoundManager.Instance.PlaySFX(SFXType.NextRound);
                 StartRound(roundData);
             }
 
-            yield return new WaitForSeconds(10f); // 라운드 진행 시간
-            EndRound(); // 다음 라운드 전 준비
+            yield return new WaitForSeconds(10f); // 라운드 지속 시간
+
+            EndRound();
         }
     }
+
 
     void StartRound(RoundData data)
     {
@@ -170,13 +176,15 @@ public class GameManager : MonoBehaviour
 
     void EndRound()
     {
-        IsGameStarted = false;
+        IsRoundActive = false;
+
         foreach (var co in activeSpawnCoroutines)
             StopCoroutine(co);
 
         activeSpawnCoroutines.Clear();
         spawnManager.ResetSpawnedObject();
     }
+
     IEnumerator SpawnLoop<T>(T type, float interval) where T : Enum
     {
         while (true)
