@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1993392131712920604}
   - component: {fileID: 6257263473289659916}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pivot1_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 6957250738677534904}
   - component: {fileID: 5541637667538504191}
   - component: {fileID: 3174055086977600917}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
@@ -119,7 +119,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 3}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1993392131712920604}
   m_Father: {fileID: 0}
@@ -167,7 +167,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: -2842841822095632264, guid: 5568428180f2cd14e84d3e07e86b10e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -227,7 +227,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &5541637667538504191
 MonoBehaviour:
   m_ObjectHideFlags: 0

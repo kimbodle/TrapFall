@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1964407189538789666}
   - component: {fileID: 5546284672970153479}
   - component: {fileID: 5158120288886646027}
-  - component: {fileID: -3789481614291603396}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Tile
@@ -117,6 +116,9 @@ MonoBehaviour:
   - {fileID: 4314385034316514726, guid: 1c752006d0690a14ea1756b08c093294, type: 3}
   - {fileID: -905189458624576061, guid: 1c752006d0690a14ea1756b08c093294, type: 3}
   frameInterval: 0.1
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!212 &5158120288886646027
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -172,20 +174,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!111 &-3789481614291603396
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4524081116972622518}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: e5d61cc8d6483a34cbd58b6823ccb1ae, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: e5d61cc8d6483a34cbd58b6823ccb1ae, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0

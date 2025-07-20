@@ -11,25 +11,20 @@ public class TrapTileEffect : MonoBehaviour, ISpecialTile
         {
             Debug.Log("TrapTileEffect 발동");
             triggered = true;
-            StartCoroutine(TrapRoutine());
+            TrapRoutine();
         }
     }
 
-    IEnumerator TrapRoutine()
+    void TrapRoutine()
     {
-        yield return new WaitForSeconds(1f);
+        Debug.Log("TrapRoutine 발동");
 
         TileComp tile = GetComponent<TileComp>();
         if (tile != null)
         {
-            tile.SetTileType(TileType.Destroyed);
-
-            yield return new WaitForSeconds(tile.recoveryTileTime);
-
-            tile.SetTileType(TileType.Normal);
+            tile.StartCoroutine(tile.DestroyTile());
+            Debug.Log("tile != null 발동");
         }
-
-        triggered = false;
     }
 
     public void ResetTile()

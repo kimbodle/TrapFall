@@ -12,8 +12,8 @@ public class TileComp : MonoBehaviour
     public float randomTileTime= 5.0f;
     public float recoveryTileTime = 3.0f;
     public TileManager tileManager;
-    public Animation breakAnimation;
     public bool isOuterWall = false;  // ← 여기 추가
+    public LayerMask playerLayer;
 
     public Vector2Int nodePosition;
     [SerializeField]
@@ -24,10 +24,19 @@ public class TileComp : MonoBehaviour
 
     private bool bIsBreak = false;
 
+
+    private bool IsPlayerOnThisTile()
+    {
+        Vector2 center = transform.position;
+        Vector2 size = new Vector2(0.9f, 0.9f); // 타일 크기에 맞게
+
+        Collider2D player = Physics2D.OverlapBox(center, size, 0f, playerLayer);
+
+        return player != null;
+    }
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        breakAnimation = GetComponent<Animation>();//
     }
 
     //밟았다고 치고
@@ -74,7 +83,39 @@ public class TileComp : MonoBehaviour
         ClearExistingEffects();
         TileEvent();
 
+        // 타입이 Danger 등 특수타일이면 → 플레이어 위에 있는지 확인
+        if (IsSpecialTile(inputTileType) && IsPlayerOnThisTile())
+        {
+            Debug.Log("타일이 변한 후 위에 플레이어가 있어 효과 즉시 발동!");
+
+            var player = Physics2D.OverlapBox(transform.position, new Vector2(0.9f, 0.9f), 0f, playerLayer);
+            if (player != null)
+            {
+                if (!IsWalkable())
+                {
+                    Debug.Log("죽음");
+                    GameManager.Instance.GameOver();
+                    return;
+                }
+
+                foreach (var tileEffect in GetComponents<ISpecialTile>())
+                {
+                    tileEffect.Activate(player.gameObject);
+                }
+            }
+        }
         //if (currentTileType == TileType.Danger) StartCoroutine(DestroyTile());
+    }
+    private bool IsSpecialTile(TileType type)
+    {
+        return type == TileType.Danger ||
+               type == TileType.Trap ||
+               type == TileType.Ice ||
+               type == TileType.Fog ||
+               type == TileType.Electric ||
+               type == TileType.Spin ||
+               type == TileType.Random ||
+               type == TileType.Destroyed;
     }
 
     public void ClearExistingEffects()
@@ -134,6 +175,8 @@ public class TileComp : MonoBehaviour
     }
     private void TileEvent()
     {
+        if (currentTileType == TileType.Normal) return;
+
         switch (currentTileType)
         {
             case TileType.Danger:
@@ -164,5 +207,14 @@ public class TileComp : MonoBehaviour
     {
         yield return new WaitForSeconds(0f); // 타일 1초 후 복구
         SetTileType(TileType.Normal);
+    }
+
+    private bool PlayerOnTop()
+    {
+        Vector2 tileCenter = transform.position;
+        Vector2 checkSize = new Vector2(0.9f, 0.9f); // 타일 크기에 맞춰 조정
+        Collider2D hit = Physics2D.OverlapBox(tileCenter + Vector2.up * 0.1f, checkSize, 0f);
+
+        return hit != null;
     }
 }
