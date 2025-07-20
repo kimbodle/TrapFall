@@ -30,6 +30,8 @@ public class RankingManager : MonoBehaviour
     private FirebaseFirestore db;
     private UIManager uiManager;
 
+    private bool isSubmitted = false;
+
     private void Awake()
     {
         db = FirebaseFirestore.DefaultInstance;
@@ -69,19 +71,21 @@ public class RankingManager : MonoBehaviour
 
     public void SubmitScore(int score)
     {
+        if (isSubmitted) return; // 중복 저장 방지
+
         string nickname = nicknameInput.text.Trim();
-        if (string.IsNullOrEmpty(nickname))
-        {
-            return;
-        }
+        if (string.IsNullOrEmpty(nickname)) return;
 
         nickname = GenerateUniqueNickname(nickname);
         currenNickname = nickname;
+
         var data = new Dictionary<string, object>
-        {
-            { "nickname", nickname },
-            { "score", score }
-        };
+    {
+        { "nickname", nickname },
+        { "score", score }
+    };
+
+        isSubmitted = true;
 
         db.Collection("Ranking").Document(nickname).SetAsync(data).ContinueWithOnMainThread(task =>
         {
@@ -93,6 +97,7 @@ public class RankingManager : MonoBehaviour
             else
             {
                 Debug.LogError("Firestore 저장 실패: " + task.Exception);
+                isSubmitted = false; // 실패 시 다시 저장 허용
             }
         });
     }
